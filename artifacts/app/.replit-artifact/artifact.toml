@@ -1,6 +1,6 @@
 kind = "web"
 previewPath = "/"
-title = "App"
+title = "Konstantine Portfolio"
 version = "1.0.0"
 id = "artifacts/app"
 router = "path"
