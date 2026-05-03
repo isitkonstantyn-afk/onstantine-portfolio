@@ -22,6 +22,9 @@ type Event = {
   industry: string;
   caseStudy: CaseStudy | null;
   thumbnail?: string;
+  role?: string;
+  desc?: string;
+  highlights?: string[];
 };
 
 const events: Event[] = [
@@ -59,11 +62,19 @@ const events: Event[] = [
   },
   {
     name: "EV Charging Expo 2026",
-    location: "Canada",
+    location: "Toronto, Canada",
     date: "2026",
     industry: "EV & Energy",
     caseStudy: null,
     thumbnail: "/thumbnails/ev-expo.jpg",
+    role: "Expo Representative — Maxperr Energy",
+    desc: "Represented Maxperr Energy on the expo floor at Canada's premier EV charging industry event. Worked the Maxperr booth, engaged property developers, fleet operators, and infrastructure investors in real-time conversations, and facilitated warm introductions between stakeholders and the Maxperr team.",
+    highlights: [
+      "Represented Maxperr Energy at the booth",
+      "Engaged fleet operators & property developers",
+      "Facilitated investor introductions on the floor",
+      "High-density lead environment — EV infrastructure focus",
+    ],
   },
   {
     name: "National Home Show",
@@ -177,15 +188,42 @@ function EventCard({ event }: { event: Event }) {
       )}
 
       {open && !cs && (
-        <div className="px-6 pb-6 border-t border-white/8 pt-5">
-          {event.thumbnail && (
-            <img
-              src={event.thumbnail}
-              alt={event.name}
-              className="w-full rounded-xl object-cover max-h-64 mb-4"
-            />
-          )}
-          <p className="text-sm text-white/40 italic">Full case study coming soon. Book me to represent you at this event.</p>
+        <div className="px-6 pb-6 border-t border-white/10">
+          <div className="pt-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              {event.role && (
+                <p className="text-xs text-white/40 uppercase tracking-wider font-mono mb-1">My Role</p>
+              )}
+              {event.role && (
+                <p className="text-white font-semibold mb-3">{event.role}</p>
+              )}
+              {event.desc && (
+                <p className="text-sm text-white/60 leading-relaxed mb-4">{event.desc}</p>
+              )}
+              {event.highlights && event.highlights.length > 0 && (
+                <ul className="space-y-2">
+                  {event.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2 text-sm text-white/60">
+                      <span className="text-emerald-400 mt-0.5">✓</span>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {!event.role && !event.desc && (
+                <p className="text-sm text-white/40 italic">Full case study coming soon. Book me to represent you at this event.</p>
+              )}
+            </div>
+            {event.thumbnail && (
+              <div>
+                <img
+                  src={event.thumbnail}
+                  alt={event.name}
+                  className="w-full rounded-xl object-cover max-h-56"
+                />
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>
