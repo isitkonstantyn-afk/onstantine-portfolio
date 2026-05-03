@@ -70,6 +70,17 @@ const pastEvents: PastEvent[] = [
     thumbnail: "/thumbnails/dr-event.jpg",
   },
   {
+    title: "EV Charging Expo 2026",
+    subtitle: "Canada's Premier EV Infrastructure Event",
+    location: "Toronto, Canada",
+    date: "2026",
+    flag: "🇨🇦",
+    role: "Expo Representative",
+    desc: "Represented Maxperr Energy on the expo floor at Canada's leading EV charging industry event — connecting with fleet operators, property developers, and infrastructure investors. Engaged attendees at the booth, facilitated introductions, and generated qualified leads in a high-density industry environment.",
+    tags: ["Expo", "EV Industry", "Lead Generation", "Networking"],
+    thumbnail: "/thumbnails/ev-expo.jpg",
+  },
+  {
     title: "Events in Toronto",
     location: "Toronto, Canada",
     date: "Multiple",
