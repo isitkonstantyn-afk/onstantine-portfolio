@@ -12,7 +12,7 @@ type Project = {
 };
 
 const projects: Project[] = [
-  { title: "Acting & Commercials", category: "Acting", thumbnail: null, folderId: null },
+  { title: "Acting & Commercials", category: "Acting", thumbnail: "/thumbnails/acting.jpg", folderId: null },
   { title: "Angus Glen Golf Club", category: "Commercial", thumbnail: "/thumbnails/angus-glen.jpg", folderId: "1bnVQiLbKF_JZgb8zb_eslQu4UkUQT4EI" },
   { title: "Arcade", category: "Modeling", thumbnail: "/thumbnails/arcade.jpg", folderId: "1oiUBr4clSspGJ-c2cP31qTmd3c7TcnZb" },
   { title: "Burlington Private Airport", category: "Commercial", thumbnail: "/thumbnails/burlington.jpg", folderId: "1T2UCUAbIP0n3xyVw8aSZV2l5my-yQUqY" },
