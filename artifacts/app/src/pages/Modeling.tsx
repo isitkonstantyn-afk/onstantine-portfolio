@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, X, ExternalLink, FolderOpen } from "lucide-react";
+import { ArrowRight, X, ExternalLink } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
 
@@ -13,13 +13,13 @@ type Project = {
 
 const projects: Project[] = [
   { title: "Acting & Commercials", category: "Acting", desc: "Commercial and acting projects", folderId: null },
-  { title: "Angus Glen Golf Club", category: "Commercial", desc: "Golf club commercial photoshoot", folderId: null },
-  { title: "Arcade", category: "Modeling", desc: "Arcade-themed editorial shoot", folderId: null },
-  { title: "Burlington Private Airport", category: "Commercial", desc: "Private airport commercial photoshoot", folderId: null },
+  { title: "Angus Glen Golf Club", category: "Commercial", desc: "Golf club commercial photoshoot", folderId: "1bnVQiLbKF_JZgb8zb_eslQu4UkUQT4EI" },
+  { title: "Arcade", category: "Modeling", desc: "Arcade-themed editorial shoot", folderId: "1oiUBr4clSspGJ-c2cP31qTmd3c7TcnZb" },
+  { title: "Burlington Private Airport", category: "Commercial", desc: "Private airport commercial photoshoot", folderId: "1T2UCUAbIP0n3xyVw8aSZV2l5my-yQUqY" },
   { title: "Clothing Photoshoot", category: "Modeling", desc: "Fashion and clothing editorial series", folderId: "1lT5uZaQT6yy7YHJolzYrzNwWcumTT1KU" },
-  { title: "Editorial Photoshoot", category: "Modeling", desc: "High-fashion editorial work", folderId: null },
+  { title: "Editorial Photoshoot", category: "Modeling", desc: "High-fashion editorial work", folderId: "1R9Uuhy5_ZOqI_9gp5Q-IPuWN1-iZ3RvU" },
   { title: "Emma Hardie", category: "Commercial", desc: "Brand campaign with Emma Hardie", folderId: null },
-  { title: "Fitness", category: "Modeling", desc: "Athletic and fitness portfolio", folderId: null },
+  { title: "Fitness", category: "Modeling", desc: "Athletic and fitness portfolio", folderId: "1RbGqHOFpmkMnCsIGJiBZtCYU8RoqlvPL" },
   { title: "Go Train Commercial", category: "Commercial", desc: "GO Train commercial photoshoot", folderId: null },
   { title: "Kings Landing", category: "Modeling", desc: "Kings Landing location shoot", folderId: null },
   { title: "Marcham Golf Club", category: "Commercial", desc: "Golf club commercial campaign", folderId: null },
@@ -36,17 +36,27 @@ const projects: Project[] = [
 
 const categories = ["All", "Modeling", "Acting", "Commercial"];
 
-const categoryGradients: Record<string, string> = {
-  Modeling: "from-zinc-900 via-zinc-800 to-zinc-900",
-  Acting: "from-stone-900 via-stone-800 to-stone-900",
-  Commercial: "from-neutral-900 via-neutral-800 to-neutral-900",
-};
-
-const categoryAccents: Record<string, string> = {
-  Modeling: "border-l-white/20",
-  Acting: "border-l-white/15",
-  Commercial: "border-l-white/10",
-};
+function DriveThumb({ folderId }: { folderId: string }) {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <iframe
+        src={`https://drive.google.com/embeddedfolderview?id=${folderId}#grid`}
+        title="preview"
+        className="border-0 pointer-events-none"
+        style={{
+          width: "350%",
+          height: "350%",
+          transform: "scale(0.286)",
+          transformOrigin: "top left",
+          opacity: 0.9,
+        }}
+        loading="lazy"
+      />
+      {/* Gradient overlay so the label at bottom stays readable */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+    </div>
+  );
+}
 
 export default function Modeling() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -95,20 +105,27 @@ export default function Modeling() {
                   onClick={() => setSelected(p)}
                   className="w-full text-left group"
                 >
-                  <div className={`rounded-xl overflow-hidden border border-white/10 bg-gradient-to-br ${categoryGradients[p.category]} transition-all duration-300 group-hover:border-white/25 group-hover:scale-[1.02]`}>
-                    {/* Image area */}
-                    <div className={`aspect-[4/5] flex flex-col items-center justify-center gap-3 border-l-4 ${categoryAccents[p.category]} relative`}>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <FolderOpen
-                        size={36}
-                        className="text-white/20 group-hover:text-white/40 transition-colors"
-                      />
-                      <span className="text-white/30 text-xs font-mono group-hover:text-white/50 transition-colors z-10">
-                        {p.folderId ? "Click to view photos" : "Photos coming soon"}
-                      </span>
+                  <div className="rounded-xl overflow-hidden border border-white/10 transition-all duration-300 group-hover:border-white/30 group-hover:scale-[1.02] group-hover:shadow-2xl">
+                    {/* Thumbnail area */}
+                    <div className="aspect-[3/4] bg-zinc-900 relative">
+                      {p.folderId ? (
+                        <DriveThumb folderId={p.folderId} />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+                          <span className="text-white/20 text-xs font-mono">Coming soon</span>
+                        </div>
+                      )}
+
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-sm font-medium px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm">
+                          View Photos
+                        </span>
+                      </div>
                     </div>
+
                     {/* Label */}
-                    <div className="p-4 border-t border-white/8">
+                    <div className="p-4 bg-zinc-900 border-t border-white/8">
                       <span className="text-xs text-white/40 uppercase tracking-wider font-mono">{p.category}</span>
                       <h3 className="font-display font-semibold text-sm mt-1 text-white/90 leading-snug">{p.title}</h3>
                     </div>
@@ -133,12 +150,9 @@ export default function Modeling() {
         </div>
       </section>
 
-      {/* Lightbox / Drive viewer */}
+      {/* Lightbox */}
       {selected && (
-        <div
-          className="fixed inset-0 z-50 flex flex-col"
-          style={{ backgroundColor: "rgba(0,0,0,0.97)" }}
-        >
+        <div className="fixed inset-0 z-50 flex flex-col" style={{ backgroundColor: "rgba(0,0,0,0.97)" }}>
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 flex-shrink-0">
             <div>
@@ -173,26 +187,10 @@ export default function Modeling() {
                 src={`https://drive.google.com/embeddedfolderview?id=${selected.folderId}#grid`}
                 className="w-full h-full border-0"
                 title={selected.title}
-                allow="autoplay"
               />
             ) : (
-              <div className="flex flex-col items-center justify-center h-full gap-6 text-center px-6">
-                <FolderOpen size={64} className="text-white/15" />
-                <div>
-                  <h3 className="font-display text-2xl font-bold text-white/80 mb-2">{selected.title}</h3>
-                  <p className="text-white/40 max-w-sm">
-                    Photos for this project are being added. Check back soon.
-                  </p>
-                </div>
-                <a
-                  href="https://drive.google.com/drive/folders/16Yw6TETzrcn4KDoAhUsMDNAMtb0uiJXV"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-                >
-                  <ExternalLink size={16} />
-                  View on Google Drive
-                </a>
+              <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-6">
+                <p className="text-white/40">Photos for this project are being added soon.</p>
               </div>
             )}
           </div>
