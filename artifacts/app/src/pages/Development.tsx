@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Code2, GraduationCap, Rocket, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Code2, GraduationCap, CheckCircle2 } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
 
@@ -28,10 +28,12 @@ const categoryColor: Record<string, string> = {
 
 const apps = [
   {
-    name: "Co-View",
-    type: "Social / Streaming",
-    desc: "A co-watching app that lets users stream content together in real time — built with synchronized playback and live chat.",
-    tags: ["Flutter", "Supabase", "Real-time"],
+    name: "CoView",
+    type: "Real-Time Co-Creation Platform",
+    desc: "Watch Together. React Together. A live platform for hosts & guests to co-watch, co-react, and co-create content in real time — no code, no setup, just press go. Features 1080p recording, synchronized playback, and live guest management.",
+    tags: ["Flutter", "Supabase", "Real-time", "Vercel"],
+    url: "https://coview-guest-v2.vercel.app",
+    thumbnail: "/thumbnails/coview.jpg",
   },
   {
     name: "Influencer CRM / Brand ERP",
@@ -124,26 +126,48 @@ const Development = () => (
             <h2 className="font-display text-2xl font-bold">Apps I've Built</h2>
           </div>
           <p className="text-white/40 text-sm mb-8">Live projects, real users, real code</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-24">
-            {apps.map((app) => (
-              <div key={app.name} className="glass rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-colors">
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <p className="text-xs text-white/40 uppercase tracking-wider font-mono mb-1">{app.type}</p>
-                    <h3 className="font-display font-bold text-xl text-white">{app.name}</h3>
+          <div className="flex flex-col gap-4 mb-24">
+            {apps.map((app) => {
+              const hasThumb = "thumbnail" in app && app.thumbnail;
+              const hasUrl = "url" in app && app.url;
+              const inner = (
+                <div className={`glass rounded-2xl border border-white/10 hover:border-white/25 transition-all duration-300 overflow-hidden ${hasThumb ? "" : "p-6"}`}>
+                  {hasThumb && (
+                    <div className="relative w-full h-52 overflow-hidden">
+                      <img src={(app as any).thumbnail} alt={app.name} className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      {hasUrl && (
+                        <span className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium">
+                          Live <ArrowUpRight size={11} />
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  <div className={hasThumb ? "p-6" : ""}>
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <p className="text-xs text-white/40 uppercase tracking-wider font-mono mb-1">{app.type}</p>
+                        <h3 className="font-display font-bold text-xl text-white">{app.name}</h3>
+                      </div>
+                      {hasUrl && !hasThumb && <ArrowUpRight size={18} className="text-white/20 group-hover:text-white/60 flex-shrink-0 mt-1 transition-colors" />}
+                    </div>
+                    <p className="text-sm text-white/55 leading-relaxed mb-4">{app.desc}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {app.tags.map((tag) => (
+                        <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-white/8 text-white/40 border border-white/10">{tag}</span>
+                      ))}
+                    </div>
                   </div>
-                  <Rocket size={18} className="text-white/20 flex-shrink-0 mt-1" />
                 </div>
-                <p className="text-sm text-white/55 leading-relaxed mb-4">{app.desc}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {app.tags.map((tag) => (
-                    <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-white/8 text-white/40 border border-white/10">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+              );
+              return hasUrl ? (
+                <a key={app.name} href={(app as any).url} target="_blank" rel="noopener noreferrer" className="group block">
+                  {inner}
+                </a>
+              ) : (
+                <div key={app.name} className="group">{inner}</div>
+              );
+            })}
           </div>
         </AnimatedSection>
 
