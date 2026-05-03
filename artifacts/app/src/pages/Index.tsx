@@ -6,25 +6,34 @@ import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlassCard from "@/components/GlassCard";
 
+import HeroSceneWrapper from "@/components/HeroSceneWrapper";
+
 const roles = [
-  "Filmmaker",
-  "Developer",
-  "Social Media Strategist",
-  "Events Manager",
   "Model & Actor",
+  "App Developer",
+  "Events Manager",
   "Business Developer",
+  "Social Media Strategist",
+  "Filmmaker",
 ];
 
 const skills = [
   { name: "Social Media & Marketing", level: 92 },
   { name: "Film & Content Production", level: 88 },
   { name: "Web & App Development", level: 85 },
-  { name: "Events Management", level: 80 },
   { name: "Business Development", level: 82 },
+  { name: "Events Management", level: 80 },
   { name: "Modeling & Acting", level: 75 },
 ];
 
-const industries = ["E-Commerce", "Technology & Startups", "Real Estate", "EV Industry"];
+const industries = [
+  "E-Commerce",
+  "Technology & Startups",
+  "Real Estate",
+  "EV & Energy",
+  "Agencies",
+  "Education",
+];
 
 const education = [
   { title: "Sobey School of Business", desc: "Business Degree" },
@@ -48,84 +57,116 @@ const Index = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setRoleIndex((i) => (i + 1) % roles.length);
-    }, 2500);
+    }, 2800);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <Layout>
-      {/* Hero */}
+      {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-16 relative overflow-hidden">
-        {/* Subtle radial glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
 
+        {/* Three.js canvas fills the hero */}
+        <HeroSceneWrapper />
+
+        {/* Radial vignette so text stays readable */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,transparent_30%,#000_100%)] pointer-events-none" />
+
+        {/* Content */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="text-center relative z-10"
         >
-          <p className="text-muted-foreground text-sm tracking-[0.3em] uppercase mb-6">Portfolio</p>
-          <h1 className="font-display text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight mb-6">
+          <motion.p
+            initial={{ opacity: 0, letterSpacing: "0.6em" }}
+            animate={{ opacity: 1, letterSpacing: "0.3em" }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="text-white/40 text-xs tracking-[0.3em] uppercase mb-8 font-mono"
+          >
+            Portfolio
+          </motion.p>
+
+          <h1 className="font-display text-7xl sm:text-8xl md:text-[10rem] font-bold tracking-tight mb-4 leading-none">
             Konstantine
           </h1>
-          <div className="h-8 overflow-hidden">
+
+          {/* Animated role ticker */}
+          <div className="h-9 overflow-hidden mt-2 mb-12">
             <motion.p
               key={roleIndex}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              className="text-muted-foreground text-lg md:text-xl tracking-wide"
+              exit={{ opacity: 0, y: -24 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="text-white/50 text-xl md:text-2xl tracking-widest font-light"
             >
               {roles[roleIndex]}
             </motion.p>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Link
+              to="/contact"
+              className="px-9 py-4 rounded-full bg-white text-black font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 text-sm tracking-wide"
+            >
+              Book a Call <ArrowRight size={16} />
+            </Link>
+            <Link
+              to="/modeling"
+              className="px-9 py-4 rounded-full border border-white/20 text-white/70 font-medium hover:border-white/50 hover:text-white transition-all text-sm tracking-wide"
+            >
+              View Portfolio
+            </Link>
+          </motion.div>
         </motion.div>
 
+        {/* Scroll hint */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="mt-12 flex flex-col sm:flex-row gap-4 relative z-10"
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
         >
-          <Link
-            to="/contact"
-            className="px-8 py-3.5 rounded-full bg-foreground text-background font-medium hover:bg-foreground/90 transition-colors flex items-center gap-2"
-          >
-            Book a Call <ArrowRight size={16} />
-          </Link>
-          <Link
-            to="/modeling"
-            className="px-8 py-3.5 rounded-full glass text-foreground font-medium hover:bg-[hsla(0,0%,100%,0.1)] transition-colors"
-          >
-            View Portfolio
-          </Link>
+          <span className="text-white/20 text-xs tracking-widest font-mono uppercase">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+            className="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"
+          />
         </motion.div>
       </section>
 
-      {/* Services Grid */}
-      <AnimatedSection className="container max-w-6xl mx-auto px-6 py-20">
-        <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">What I Do</h2>
-        <p className="text-muted-foreground mb-12 max-w-lg">A diverse skill set across creative, technical, and business domains.</p>
+      {/* ── WHAT I DO ─────────────────────────────────────────── */}
+      <AnimatedSection className="container max-w-6xl mx-auto px-6 py-24">
+        <p className="text-white/30 text-xs tracking-[0.3em] uppercase font-mono mb-3">Expertise</p>
+        <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">What I Do</h2>
+        <p className="text-white/40 mb-14 max-w-lg">A diverse skill set across creative, technical, and business domains.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((s) => (
-            <Link to={s.path} key={s.path}>
-              <GlassCard className="h-full">
-                <s.icon className="text-accent mb-4" size={28} />
+            <Link to={s.path} key={s.path} className="group">
+              <GlassCard className="h-full transition-all duration-300 group-hover:border-white/25">
+                <s.icon className="text-white/40 mb-4 group-hover:text-white/70 transition-colors" size={26} />
                 <h3 className="font-display font-semibold text-lg mb-2">{s.label}</h3>
-                <p className="text-muted-foreground text-sm">{s.desc}</p>
-                <ArrowRight size={16} className="mt-4 text-muted-foreground group-hover:text-foreground transition-colors group-hover:translate-x-1 transform duration-200" />
+                <p className="text-white/40 text-sm mb-4">{s.desc}</p>
+                <ArrowRight size={15} className="text-white/25 group-hover:text-white/60 group-hover:translate-x-1 transform transition-all duration-200" />
               </GlassCard>
             </Link>
           ))}
         </div>
       </AnimatedSection>
 
-      {/* Skills */}
-      <AnimatedSection className="container max-w-6xl mx-auto px-6 py-20">
-        <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Strengths</h2>
-        <p className="text-muted-foreground mb-12 max-w-lg">Skill levels I continue to develop and refine.</p>
+      {/* ── STRENGTHS ─────────────────────────────────────────── */}
+      <AnimatedSection className="container max-w-6xl mx-auto px-6 py-24">
+        <p className="text-white/30 text-xs tracking-[0.3em] uppercase font-mono mb-3">Skills</p>
+        <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">Strengths</h2>
+        <p className="text-white/40 mb-14 max-w-lg">Skill levels I continue to develop and refine.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {skills.map((skill, i) => (
             <motion.div
@@ -133,19 +174,27 @@ const Index = () => {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              transition={{ delay: i * 0.08, duration: 0.5 }}
             >
               <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium">{skill.name}</span>
-                <span className="text-xs text-muted-foreground">{skill.level}%</span>
+                <span className="text-sm font-medium text-white/80">{skill.name}</span>
+                <span className="text-xs text-white/30 font-mono">{skill.level}%</span>
               </div>
-              <div className="h-2 rounded-full bg-secondary overflow-hidden">
+              <div className="h-px rounded-full bg-white/10 overflow-visible relative">
                 <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-accent/60 to-accent"
+                  className="h-px rounded-full bg-white/60 absolute top-0 left-0"
                   initial={{ width: 0 }}
                   whileInView={{ width: `${skill.level}%` }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1, duration: 0.8, ease: "easeOut" }}
+                  transition={{ delay: 0.2 + i * 0.08, duration: 1, ease: "easeOut" }}
+                />
+                <motion.div
+                  className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-white"
+                  initial={{ left: 0, opacity: 0 }}
+                  whileInView={{ left: `${skill.level}%`, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.08, duration: 1, ease: "easeOut" }}
+                  style={{ marginLeft: "-3px" }}
                 />
               </div>
             </motion.div>
@@ -153,43 +202,55 @@ const Index = () => {
         </div>
       </AnimatedSection>
 
-      {/* Industries */}
-      <AnimatedSection className="container max-w-6xl mx-auto px-6 py-20">
-        <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Industries</h2>
-        <p className="text-muted-foreground mb-12 max-w-lg">Sectors I've worked across and understand deeply.</p>
+      {/* ── INDUSTRIES ────────────────────────────────────────── */}
+      <AnimatedSection className="container max-w-6xl mx-auto px-6 py-24">
+        <p className="text-white/30 text-xs tracking-[0.3em] uppercase font-mono mb-3">Sectors</p>
+        <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">Industries</h2>
+        <p className="text-white/40 mb-14 max-w-lg">Sectors I've worked across and understand deeply.</p>
         <div className="flex flex-wrap gap-3">
-          {industries.map((ind) => (
-            <span key={ind} className="glass px-6 py-3 rounded-full text-sm font-medium">
+          {industries.map((ind, i) => (
+            <motion.span
+              key={ind}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.07, duration: 0.4 }}
+              className="glass px-6 py-3 rounded-full text-sm font-medium border border-white/10 text-white/70 hover:border-white/30 hover:text-white transition-all cursor-default"
+            >
               {ind}
-            </span>
+            </motion.span>
           ))}
         </div>
       </AnimatedSection>
 
-      {/* Education */}
-      <AnimatedSection className="container max-w-6xl mx-auto px-6 py-20">
-        <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Education & Certifications</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+      {/* ── EDUCATION ─────────────────────────────────────────── */}
+      <AnimatedSection className="container max-w-6xl mx-auto px-6 py-24">
+        <p className="text-white/30 text-xs tracking-[0.3em] uppercase font-mono mb-3">Background</p>
+        <h2 className="font-display text-4xl md:text-5xl font-bold mb-14">Education & Certifications</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {education.map((ed) => (
             <GlassCard key={ed.title}>
-              <h3 className="font-display font-semibold mb-1">{ed.title}</h3>
-              <p className="text-sm text-muted-foreground">{ed.desc}</p>
+              <h3 className="font-display font-semibold mb-1 text-white">{ed.title}</h3>
+              <p className="text-sm text-white/40">{ed.desc}</p>
             </GlassCard>
           ))}
         </div>
       </AnimatedSection>
 
-      {/* CTA */}
+      {/* ── CTA ───────────────────────────────────────────────── */}
       <AnimatedSection className="container max-w-6xl mx-auto px-6 py-32 text-center">
-        <h2 className="font-display text-3xl md:text-5xl font-bold mb-6">Ready to Work Together?</h2>
-        <p className="text-muted-foreground mb-10 max-w-md mx-auto">
-          Let's discuss how my skills can help elevate your next project.
+        <p className="text-white/30 text-xs tracking-[0.3em] uppercase font-mono mb-6">Let's Go</p>
+        <h2 className="font-display text-4xl md:text-6xl font-bold mb-6">
+          Ready to Work<br />Together?
+        </h2>
+        <p className="text-white/40 mb-12 max-w-md mx-auto">
+          Let's discuss how my skills can elevate your next project.
         </p>
         <Link
           to="/contact"
-          className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-foreground text-background font-semibold hover:bg-foreground/90 transition-colors"
+          className="inline-flex items-center gap-2 px-12 py-5 rounded-full bg-white text-black font-semibold hover:opacity-90 transition-opacity text-sm tracking-wide"
         >
-          Book a Call <ArrowRight size={18} />
+          Book a Call <ArrowRight size={16} />
         </Link>
       </AnimatedSection>
     </Layout>
