@@ -44,6 +44,7 @@ const pastEvents: PastEvent[] = [
     tags: ["Private Social", "EV Industry", "Investor Briefing", "Networking"],
     attendees: "67 attended",
     url: "https://lu.ma/87zwm62a",
+    thumbnail: "/thumbnails/maxperr-social.jpg",
   },
   {
     title: "The Success Factor",
@@ -56,6 +57,7 @@ const pastEvents: PastEvent[] = [
     tags: ["Networking", "Non-profit", "Business", "Community"],
     attendees: "77 attended",
     url: "https://www.eventbrite.ca/e/the-success-factor-tickets-1966441206584",
+    thumbnail: "/thumbnails/success-factor.jpg",
   },
   {
     title: "Events in the Dominican Republic",
@@ -65,6 +67,7 @@ const pastEvents: PastEvent[] = [
     role: "Organizer & Project Manager",
     desc: "Planned and project-managed events on the ground in the DR — coordinating vendors, venues, logistics, and on-site execution from start to finish.",
     tags: ["Project Management", "Vendor Coordination", "On-Site Execution"],
+    thumbnail: "/thumbnails/dr-event.jpg",
   },
   {
     title: "Events in Toronto",
