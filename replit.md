@@ -1,27 +1,47 @@
-# Workspace
+# Konstantine Portfolio
 
-## Overview
+A dark, glassmorphism-styled personal portfolio site for Konstantine — a filmmaker/creative based in Halifax, Canada.
 
-pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
+## Architecture
 
-## Stack
+This is a **pnpm monorepo** with the following structure:
 
-- **Monorepo tool**: pnpm workspaces
-- **Node.js version**: 24
-- **Package manager**: pnpm
-- **TypeScript version**: 5.9
-- **API framework**: Express 5
-- **Database**: PostgreSQL + Drizzle ORM
-- **Validation**: Zod (`zod/v4`), `drizzle-zod`
-- **API codegen**: Orval (from OpenAPI spec)
-- **Build**: esbuild (CJS bundle)
+- `artifacts/app/` — React + Vite frontend (the portfolio site)
+- `artifacts/api-server/` — Express API server (scaffold, not used by this app)
+- `artifacts/mockup-sandbox/` — Design/mockup sandbox
+- `lib/api-spec/` — OpenAPI spec
+- `lib/api-client-react/` — Generated React Query hooks
+- `lib/db/` — Drizzle ORM + PostgreSQL schema
 
-## Key Commands
+## Frontend (`artifacts/app`)
 
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- `pnpm --filter @workspace/api-server run dev` — run API server locally
+**Pure frontend app — no backend/auth needed.**
 
-See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
+- **Framework**: React + Vite (Tailwind v3 + PostCSS)
+- **Router**: react-router-dom with `basename={import.meta.env.BASE_URL}`
+- **UI**: shadcn/ui components + custom glassmorphism components
+- **Fonts**: Space Grotesk (display) + Inter (body) via Google Fonts
+- **Theme**: Dark-only with custom CSS variables in `src/index.css`
+
+### Pages
+- `/` — Home/Hero
+- `/modeling` — Modeling & Acting
+- `/social-media` — Social Media
+- `/events` — Events
+- `/development` — Web & App Dev
+- `/business` — Business Dev
+- `/contact` — Contact form
+
+### Key files
+- `artifacts/app/src/App.tsx` — Router + providers
+- `artifacts/app/src/index.css` — Theme variables (dark palette)
+- `artifacts/app/tailwind.config.ts` — Tailwind v3 config with custom animations
+- `artifacts/app/vite.config.ts` — Vite config (uses PostCSS for Tailwind v3)
+
+## Migration Notes
+
+Imported from lovable.dev. No Supabase was used — pure frontend app. Replaced:
+- `@vitejs/plugin-react-swc` → `@vitejs/plugin-react`
+- `lovable-tagger` → removed
+- `@tailwindcss/vite` (v4) → Tailwind v3 via PostCSS
+- `BrowserRouter` now uses `basename={import.meta.env.BASE_URL}` for Replit proxy routing
