@@ -1,74 +1,214 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, BarChart3, Users, Target, TrendingUp } from "lucide-react";
+import { ExternalLink, BarChart3, Users, Target, TrendingUp } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
-import GlassCard from "@/components/GlassCard";
 
 const services = [
-  { icon: Users, title: "Influencer Management", desc: "End-to-end management of influencer partnerships, from outreach to campaign execution." },
-  { icon: Target, title: "Content Strategy", desc: "Data-driven content planning tailored to grow engagement and audience." },
-  { icon: BarChart3, title: "Account Management", desc: "Full management of social media accounts including posting, community engagement, and analytics." },
-  { icon: TrendingUp, title: "Growth & SEO", desc: "Organic growth strategies combining social media with SEO best practices." },
+  { icon: Users, title: "Account Management", desc: "Full management of social media accounts — content scheduling, community engagement, analytics, and growth strategy." },
+  { icon: Target, title: "Content Strategy", desc: "Data-driven content planning built around the algorithm and the audience. Reels, shorts, carousels, and long-form." },
+  { icon: BarChart3, title: "Brand Positioning", desc: "Craft the voice, aesthetic, and narrative that makes a brand instantly recognizable across platforms." },
+  { icon: TrendingUp, title: "Growth & Reach", desc: "Organic growth strategies — hashtags, posting cadence, collabs, and community building that compounds over time." },
 ];
 
-const caseStudies = [
-  { title: "E-Commerce Brand Growth", metric: "320%", metricLabel: "Follower Growth", desc: "Scaled an e-commerce brand's social presence across Instagram and TikTok." },
-  { title: "Startup Launch Campaign", metric: "1.2M", metricLabel: "Impressions", desc: "Launched a tech startup's social media presence from zero to viral." },
-  { title: "Influencer Partnership", metric: "48%", metricLabel: "Engagement Rate", desc: "Managed multi-influencer campaign for a lifestyle brand." },
+type Platform = "TikTok" | "YouTube" | "LinkedIn" | "Instagram";
+
+type ManagedAccount = {
+  platform: Platform;
+  handle: string;
+  url: string;
+  niche: string;
+  role: string;
+  desc: string;
+  stats: { label: string; value: string }[];
+  highlight: string;
+};
+
+const accounts: ManagedAccount[] = [
+  {
+    platform: "TikTok",
+    handle: "@tech_tok_world",
+    url: "https://www.tiktok.com/@tech_tok_world",
+    niche: "Tech & Innovation",
+    role: "Account Manager & Content Strategist",
+    desc: "Built and managed a tech-focused TikTok channel from the ground up — developing a consistent content style around emerging technology, gadgets, and digital trends.",
+    stats: [
+      { label: "Followers", value: "4,600+" },
+      { label: "Total Likes", value: "32.4K" },
+      { label: "Videos Posted", value: "144" },
+      { label: "Avg. Engagement", value: "7%" },
+    ],
+    highlight: "32,400 total likes on tech content",
+  },
+  {
+    platform: "YouTube",
+    handle: "@Dantitude Dance Entertainment",
+    url: "https://www.youtube.com/@dantitudedanceentertainmen8548",
+    niche: "Dance & Entertainment",
+    role: "Channel Manager & Growth Strategist",
+    desc: "Managed YouTube presence for a dance and entertainment brand — optimizing video titles, thumbnails, descriptions, and upload cadence to maximize reach and subscriber growth.",
+    stats: [
+      { label: "Platform", value: "YouTube" },
+      { label: "Niche", value: "Dance & Entertainment" },
+      { label: "Content Type", value: "Performances, tutorials & events" },
+      { label: "Strategy", value: "SEO + consistency" },
+    ],
+    highlight: "Dance & entertainment content management",
+  },
+  {
+    platform: "LinkedIn",
+    handle: "Maxperr Energy",
+    url: "https://www.linkedin.com/company/maxperrenergy/",
+    niche: "EV Charging & Clean Energy",
+    role: "LinkedIn Page Manager",
+    desc: "Managed the corporate LinkedIn presence for Maxperr Energy — creating thought leadership content around Canada's EV transition, posting event recaps, and growing the company's professional network and brand authority in the clean-energy sector.",
+    stats: [
+      { label: "Niche", value: "Clean Energy / EV" },
+      { label: "Content Focus", value: "Thought leadership" },
+      { label: "Target Audience", value: "Investors & developers" },
+      { label: "Platform", value: "LinkedIn Company" },
+    ],
+    highlight: "B2B brand authority in Canada's EV sector",
+  },
+  {
+    platform: "LinkedIn",
+    handle: "Nigel Thomas",
+    url: "https://www.linkedin.com/in/nigelthomas-ai/",
+    niche: "Artificial Intelligence & Tech",
+    role: "Personal Brand Manager",
+    desc: "Managed and grew a personal LinkedIn brand in the AI space — crafting posts around machine learning, AI tools, and industry insights to position Nigel as a credible voice in the tech and AI community.",
+    stats: [
+      { label: "Niche", value: "AI & Technology" },
+      { label: "Content Type", value: "Thought leadership & insights" },
+      { label: "Target Audience", value: "Tech professionals & founders" },
+      { label: "Platform", value: "LinkedIn Personal" },
+    ],
+    highlight: "Personal brand positioning in the AI space",
+  },
 ];
+
+const platformColors: Record<Platform, string> = {
+  TikTok: "bg-pink-500/20 text-pink-400 border-pink-500/30",
+  YouTube: "bg-red-500/20 text-red-400 border-red-500/30",
+  LinkedIn: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+  Instagram: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+};
+
+const platformDot: Record<Platform, string> = {
+  TikTok: "bg-pink-400",
+  YouTube: "bg-red-400",
+  LinkedIn: "bg-blue-400",
+  Instagram: "bg-purple-400",
+};
+
+function AccountCard({ account }: { account: ManagedAccount }) {
+  return (
+    <div className="glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col">
+      {/* Header */}
+      <div className="p-6 pb-4 border-b border-white/8">
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <span className={`text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded-full border ${platformColors[account.platform]}`}>
+            {account.platform}
+          </span>
+          <a
+            href={account.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/30 hover:text-white/70 transition-colors"
+          >
+            <ExternalLink size={16} />
+          </a>
+        </div>
+        <h3 className="font-display text-xl font-bold text-white mb-0.5">{account.handle}</h3>
+        <p className="text-xs text-white/40 font-mono">{account.niche}</p>
+      </div>
+
+      {/* Body */}
+      <div className="p-6 flex-1 flex flex-col gap-4">
+        <div>
+          <p className="text-xs text-white/40 uppercase tracking-wider font-mono mb-1">My Role</p>
+          <p className="text-sm font-semibold text-white">{account.role}</p>
+        </div>
+        <p className="text-sm text-white/60 leading-relaxed">{account.desc}</p>
+
+        {/* Stats grid */}
+        <div className="grid grid-cols-2 gap-2 mt-auto">
+          {account.stats.map((s) => (
+            <div key={s.label} className="bg-white/5 rounded-xl p-3">
+              <p className="text-xs text-white/40 font-mono mb-0.5">{s.label}</p>
+              <p className="text-sm font-semibold text-white">{s.value}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Highlight pill */}
+        <div className="flex items-center gap-2 mt-1">
+          <span className={`inline-block w-2 h-2 rounded-full flex-shrink-0 ${platformDot[account.platform]}`} />
+          <p className="text-xs text-white/50">{account.highlight}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const SocialMedia = () => (
   <Layout>
     <section className="pt-32 pb-16 px-6">
       <div className="container max-w-6xl mx-auto">
+
+        {/* Hero */}
         <AnimatedSection>
-          <p className="text-muted-foreground text-sm tracking-[0.3em] uppercase mb-4">Services</p>
-          <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">Social Media &<br />Influencer Management</h1>
-          <p className="text-muted-foreground max-w-lg mb-16">
-            Strategic social media management and influencer partnerships that drive real growth and engagement.
+          <p className="text-muted-foreground text-sm tracking-[0.3em] uppercase mb-4">Social Media</p>
+          <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
+            Content That<br />
+            <span className="text-white/40">Actually Grows.</span>
+          </h1>
+          <p className="text-muted-foreground max-w-lg mb-4 text-lg">
+            I manage social media accounts across TikTok, YouTube, and LinkedIn — building brand authority, growing audiences, and creating content that converts.
+          </p>
+          <p className="text-white/40 max-w-lg mb-16 text-sm">
+            From tech TikToks to corporate LinkedIn pages — here are the accounts I manage.
           </p>
         </AnimatedSection>
 
-        {/* Services */}
+        {/* Managed Accounts */}
         <AnimatedSection>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-24">
-            {services.map((s) => (
-              <GlassCard key={s.title}>
-                <s.icon className="text-accent mb-4" size={28} />
-                <h3 className="font-display font-semibold text-lg mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground">{s.desc}</p>
-              </GlassCard>
+          <h2 className="font-display text-3xl font-bold mb-2">Managed Accounts</h2>
+          <p className="text-white/40 text-sm mb-8">Click the link icon on any card to view the live account.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-24">
+            {accounts.map((a) => (
+              <AccountCard key={a.handle} account={a} />
             ))}
           </div>
         </AnimatedSection>
 
-        {/* Case Studies */}
+        {/* Services */}
         <AnimatedSection>
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Results</h2>
-          <p className="text-muted-foreground mb-12">Selected case studies showcasing impact.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {caseStudies.map((cs) => (
-              <GlassCard key={cs.title}>
-                <p className="font-display text-4xl font-bold text-accent mb-1">{cs.metric}</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-4">{cs.metricLabel}</p>
-                <h3 className="font-display font-semibold mb-2">{cs.title}</h3>
-                <p className="text-sm text-muted-foreground">{cs.desc}</p>
-              </GlassCard>
+          <h2 className="font-display text-3xl font-bold mb-2">What I Do</h2>
+          <p className="text-white/40 text-sm mb-8">The full scope of social media management I offer.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-24">
+            {services.map((s) => (
+              <div key={s.title} className="glass rounded-2xl p-6 border border-white/10">
+                <s.icon className="text-white/60 mb-4" size={24} />
+                <h3 className="font-display font-semibold text-lg mb-2 text-white">{s.title}</h3>
+                <p className="text-sm text-white/50">{s.desc}</p>
+              </div>
             ))}
           </div>
         </AnimatedSection>
 
         {/* CTA */}
-        <AnimatedSection className="text-center py-24">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">Hire Me to Coach You & Your Team</h2>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">Learn proven strategies to grow your social presence.</p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-foreground text-background font-semibold"
+        <AnimatedSection className="text-center py-16 border border-white/10 rounded-3xl glass">
+          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Want Me to Manage Your Accounts?</h2>
+          <p className="text-white/50 mb-8 max-w-md mx-auto">Whether it's TikTok, LinkedIn, or YouTube — let's build your audience together.</p>
+          <a
+            href="https://cal.com/konstantine"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors"
           >
-            Get Started <ArrowRight size={18} />
-          </Link>
+            Book a Call
+          </a>
         </AnimatedSection>
+
       </div>
     </section>
   </Layout>
