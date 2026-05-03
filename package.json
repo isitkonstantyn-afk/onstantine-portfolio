@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
-    "dev": "npx -y pnpm@9 --filter @workspace/app run dev",
+    "dev": "PORT=${PORT:-8080} npx -y pnpm@9 --filter @workspace/app run dev",
     "build": "npx -y pnpm@9 run typecheck && npx -y pnpm@9 -r --if-present run build",
     "typecheck:libs": "tsc --build",
     "typecheck": "npx -y pnpm@9 run typecheck:libs && npx -y pnpm@9 -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
