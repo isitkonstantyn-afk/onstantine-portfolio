@@ -11,10 +11,14 @@ const services = [
 
 type Platform = "TikTok" | "YouTube" | "LinkedIn" | "Instagram";
 
-type ManagedAccount = {
+type PlatformLink = {
   platform: Platform;
   handle: string;
   url: string;
+};
+
+type ManagedAccount = {
+  platforms: PlatformLink[];
   niche: string;
   role: string;
   desc: string;
@@ -24,9 +28,7 @@ type ManagedAccount = {
 
 const accounts: ManagedAccount[] = [
   {
-    platform: "TikTok",
-    handle: "@tech_tok_world",
-    url: "https://www.tiktok.com/@tech_tok_world",
+    platforms: [{ platform: "TikTok", handle: "@tech_tok_world", url: "https://www.tiktok.com/@tech_tok_world" }],
     niche: "Tech & Innovation",
     role: "Account Manager & Content Strategist",
     desc: "Built and managed a tech-focused TikTok channel from the ground up — developing a consistent content style around emerging technology, gadgets, and digital trends.",
@@ -39,9 +41,7 @@ const accounts: ManagedAccount[] = [
     highlight: "32,400 total likes on tech content",
   },
   {
-    platform: "YouTube",
-    handle: "@Dantitude Dance Entertainment",
-    url: "https://www.youtube.com/@dantitudedanceentertainmen8548",
+    platforms: [{ platform: "YouTube", handle: "@Dantitude Dance Entertainment", url: "https://www.youtube.com/@dantitudedanceentertainmen8548" }],
     niche: "Dance & Entertainment",
     role: "Channel Manager & Growth Strategist",
     desc: "Managed YouTube presence for a dance and entertainment brand — optimizing video titles, thumbnails, descriptions, and upload cadence to maximize reach and subscriber growth.",
@@ -54,9 +54,7 @@ const accounts: ManagedAccount[] = [
     highlight: "Dance & entertainment content management",
   },
   {
-    platform: "LinkedIn",
-    handle: "Maxperr Energy",
-    url: "https://www.linkedin.com/company/maxperrenergy/",
+    platforms: [{ platform: "LinkedIn", handle: "Maxperr Energy", url: "https://www.linkedin.com/company/maxperrenergy/" }],
     niche: "EV Charging & Clean Energy",
     role: "LinkedIn Page Manager",
     desc: "Managed the corporate LinkedIn presence for Maxperr Energy — creating thought leadership content around Canada's EV transition, posting event recaps, and growing the company's professional network and brand authority in the clean-energy sector.",
@@ -69,9 +67,7 @@ const accounts: ManagedAccount[] = [
     highlight: "B2B brand authority in Canada's EV sector",
   },
   {
-    platform: "LinkedIn",
-    handle: "Nigel Thomas",
-    url: "https://www.linkedin.com/in/nigelthomas-ai/",
+    platforms: [{ platform: "LinkedIn", handle: "Nigel Thomas", url: "https://www.linkedin.com/in/nigelthomas-ai/" }],
     niche: "Artificial Intelligence & Tech",
     role: "Personal Brand Manager",
     desc: "Managed and grew a personal LinkedIn brand in the AI space — crafting posts around machine learning, AI tools, and industry insights to position Nigel as a credible voice in the tech and AI community.",
@@ -82,6 +78,38 @@ const accounts: ManagedAccount[] = [
       { label: "Platform", value: "LinkedIn Personal" },
     ],
     highlight: "Personal brand positioning in the AI space",
+  },
+  {
+    platforms: [
+      { platform: "LinkedIn", handle: "TRNDZY Corp", url: "https://www.linkedin.com/company/trndzy-corp/posts/?feedView=all" },
+      { platform: "Instagram", handle: "@trndzy.app", url: "https://www.instagram.com/trndzy.app/" },
+    ],
+    niche: "Tech Startup · Social Commerce",
+    role: "Social Media Manager — Brand & Growth",
+    desc: "Managed multi-platform presence for TRNDZY Corp — a social commerce tech startup. Created content that communicated the product vision, grew brand awareness among early adopters, and built community ahead of launch across LinkedIn and Instagram.",
+    stats: [
+      { label: "Platforms", value: "LinkedIn + Instagram" },
+      { label: "Niche", value: "Social Commerce / Tech" },
+      { label: "Content Focus", value: "Brand awareness & launch" },
+      { label: "Target Audience", value: "Founders & early adopters" },
+    ],
+    highlight: "Multi-platform launch strategy for a tech startup",
+  },
+  {
+    platforms: [
+      { platform: "LinkedIn", handle: "Abbas Jaber", url: "https://www.linkedin.com/in/abbas-jaber-cfte-msta-040ab765/" },
+      { platform: "Instagram", handle: "@aj_founder_journey", url: "https://www.instagram.com/aj_founder_journey/" },
+    ],
+    niche: "Founder Journey · Fintech & Innovation",
+    role: "Personal Brand Manager",
+    desc: "Managed personal brand for Abbas Jaber (CFTE, MSTA) — a fintech founder and innovator. Crafted content documenting his founder journey, industry insights, and startup milestones across LinkedIn and Instagram to build credibility and grow his professional audience.",
+    stats: [
+      { label: "Platforms", value: "LinkedIn + Instagram" },
+      { label: "Niche", value: "Fintech / Founder Journey" },
+      { label: "Content Type", value: "Founder story & insights" },
+      { label: "Target Audience", value: "Investors & fellow founders" },
+    ],
+    highlight: "Founder personal brand across LinkedIn & Instagram",
   },
 ];
 
@@ -100,24 +128,30 @@ const platformDot: Record<Platform, string> = {
 };
 
 function AccountCard({ account }: { account: ManagedAccount }) {
+  const primaryPlatform = account.platforms[0].platform;
   return (
     <div className="glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col">
       {/* Header */}
       <div className="p-6 pb-4 border-b border-white/8">
         <div className="flex items-start justify-between gap-3 mb-3">
-          <span className={`text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded-full border ${platformColors[account.platform]}`}>
-            {account.platform}
-          </span>
-          <a
-            href={account.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/30 hover:text-white/70 transition-colors"
-          >
-            <ExternalLink size={16} />
-          </a>
+          <div className="flex flex-wrap gap-2">
+            {account.platforms.map((p) => (
+              <a
+                key={p.url}
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded-full border transition-opacity hover:opacity-80 ${platformColors[p.platform]}`}
+              >
+                {p.platform}
+                <ExternalLink size={10} />
+              </a>
+            ))}
+          </div>
         </div>
-        <h3 className="font-display text-xl font-bold text-white mb-0.5">{account.handle}</h3>
+        <h3 className="font-display text-xl font-bold text-white mb-0.5">
+          {account.platforms.map((p) => p.handle).join(" · ")}
+        </h3>
         <p className="text-xs text-white/40 font-mono">{account.niche}</p>
       </div>
 
@@ -141,7 +175,7 @@ function AccountCard({ account }: { account: ManagedAccount }) {
 
         {/* Highlight pill */}
         <div className="flex items-center gap-2 mt-1">
-          <span className={`inline-block w-2 h-2 rounded-full flex-shrink-0 ${platformDot[account.platform]}`} />
+          <span className={`inline-block w-2 h-2 rounded-full flex-shrink-0 ${platformDot[primaryPlatform]}`} />
           <p className="text-xs text-white/50">{account.highlight}</p>
         </div>
       </div>
@@ -175,7 +209,7 @@ const SocialMedia = () => (
           <p className="text-white/40 text-sm mb-8">Click the link icon on any card to view the live account.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-24">
             {accounts.map((a) => (
-              <AccountCard key={a.handle} account={a} />
+              <AccountCard key={a.platforms.map((p) => p.handle).join("-")} account={a} />
             ))}
           </div>
         </AnimatedSection>
