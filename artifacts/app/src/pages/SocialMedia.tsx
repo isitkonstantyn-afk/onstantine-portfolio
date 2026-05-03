@@ -70,16 +70,16 @@ const accounts: ManagedAccount[] = [
   },
   {
     platforms: [{ platform: "LinkedIn", handle: "Nigel Thomas", url: "https://www.linkedin.com/in/nigelthomas-ai/" }],
-    niche: "Artificial Intelligence & Tech",
+    niche: "Agency Coaching · $30K–$100K MRR",
     role: "Personal Brand Manager",
-    desc: "Managed and grew a personal LinkedIn brand in the AI space — crafting posts around machine learning, AI tools, and industry insights to position Nigel as a credible voice in the tech and AI community.",
+    desc: "Managed and grew Nigel's LinkedIn presence as an agency coach helping CEOs scale from $30K to $100K MRR — crafting content around agency growth, leadership, and revenue strategy to build authority with his target audience of agency owners.",
     stats: [
-      { label: "Niche", value: "AI & Technology" },
-      { label: "Content Type", value: "Thought leadership & insights" },
-      { label: "Target Audience", value: "Tech professionals & founders" },
+      { label: "Niche", value: "Agency Coaching" },
+      { label: "Target Client", value: "CEOs $30K–$100K MRR" },
+      { label: "Content Type", value: "Growth strategy & authority" },
       { label: "Platform", value: "LinkedIn Personal" },
     ],
-    highlight: "Personal brand positioning in the AI space",
+    highlight: "Authority brand for agency coaches targeting CEOs",
   },
   {
     platforms: [
