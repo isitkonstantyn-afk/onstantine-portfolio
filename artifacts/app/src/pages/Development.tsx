@@ -135,7 +135,7 @@ const Development = () => (
         </AnimatedSection>
 
         {/* Apps */}
-        <AnimatedSection delay={0.1} id="apps">
+        <AnimatedSection delay={0.1}>
           <div className="flex items-center gap-3 mb-2">
             <Code2 size={20} className="text-white/40" />
             <h2 className="font-display text-2xl font-bold">Apps I've Built</h2>
