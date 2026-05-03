@@ -7,69 +7,79 @@ import AnimatedSection from "@/components/AnimatedSection";
 type Project = {
   title: string;
   category: string;
-  desc: string;
+  thumbnail: string | null;
   folderId: string | null;
 };
 
 const projects: Project[] = [
-  { title: "Acting & Commercials", category: "Acting", desc: "Commercial and acting projects", folderId: null },
-  { title: "Angus Glen Golf Club", category: "Commercial", desc: "Golf club commercial photoshoot", folderId: "1bnVQiLbKF_JZgb8zb_eslQu4UkUQT4EI" },
-  { title: "Arcade", category: "Modeling", desc: "Arcade-themed editorial shoot", folderId: "1oiUBr4clSspGJ-c2cP31qTmd3c7TcnZb" },
-  { title: "Burlington Private Airport", category: "Commercial", desc: "Private airport commercial photoshoot", folderId: "1T2UCUAbIP0n3xyVw8aSZV2l5my-yQUqY" },
-  { title: "Clothing Photoshoot", category: "Modeling", desc: "Fashion and clothing editorial series", folderId: "1lT5uZaQT6yy7YHJolzYrzNwWcumTT1KU" },
-  { title: "Editorial Photoshoot", category: "Modeling", desc: "High-fashion editorial work", folderId: "1R9Uuhy5_ZOqI_9gp5Q-IPuWN1-iZ3RvU" },
-  { title: "Emma Hardie", category: "Commercial", desc: "Brand campaign with Emma Hardie", folderId: null },
-  { title: "Fitness", category: "Modeling", desc: "Athletic and fitness portfolio", folderId: "1RbGqHOFpmkMnCsIGJiBZtCYU8RoqlvPL" },
-  { title: "Go Train Commercial", category: "Commercial", desc: "GO Train commercial photoshoot", folderId: null },
-  { title: "Kings Landing", category: "Modeling", desc: "Kings Landing location shoot", folderId: null },
-  { title: "Marcham Golf Club", category: "Commercial", desc: "Golf club commercial campaign", folderId: null },
-  { title: "Moneta Photoshoot", category: "Modeling", desc: "Moneta brand photoshoot", folderId: null },
-  { title: "Mr Fish", category: "Commercial", desc: "Mr Fish brand campaign", folderId: null },
-  { title: "Mr. Coco", category: "Commercial", desc: "Mr. Coco brand campaign", folderId: null },
-  { title: "NA Chinese Radio Station", category: "Commercial", desc: "North American Chinese Radio Station campaign", folderId: null },
-  { title: "Niagara Falls Winery", category: "Commercial", desc: "Winery commercial shoot in Niagara Falls", folderId: null },
-  { title: "Ramen Station", category: "Commercial", desc: "Ramen Station restaurant campaign", folderId: null },
-  { title: "Re:Max", category: "Commercial", desc: "Re:Max real estate campaign", folderId: null },
-  { title: "ShangriLa", category: "Modeling", desc: "ShangriLa luxury editorial", folderId: null },
-  { title: "The Ranch", category: "Modeling", desc: "The Ranch location shoot", folderId: null },
+  { title: "Acting & Commercials", category: "Acting", thumbnail: null, folderId: null },
+  { title: "Angus Glen Golf Club", category: "Commercial", thumbnail: null, folderId: "1bnVQiLbKF_JZgb8zb_eslQu4UkUQT4EI" },
+  { title: "Arcade", category: "Modeling", thumbnail: null, folderId: "1oiUBr4clSspGJ-c2cP31qTmd3c7TcnZb" },
+  { title: "Burlington Private Airport", category: "Commercial", thumbnail: "/thumbnails/burlington.jpg", folderId: "1T2UCUAbIP0n3xyVw8aSZV2l5my-yQUqY" },
+  { title: "Clothing Photoshoot", category: "Modeling", thumbnail: null, folderId: "1lT5uZaQT6yy7YHJolzYrzNwWcumTT1KU" },
+  { title: "Editorial Photoshoot", category: "Modeling", thumbnail: "/thumbnails/editorial.jpg", folderId: "1R9Uuhy5_ZOqI_9gp5Q-IPuWN1-iZ3RvU" },
+  { title: "Emma Hardie", category: "Commercial", thumbnail: "/thumbnails/emma-hardie.jpg", folderId: null },
+  { title: "Fitness", category: "Modeling", thumbnail: null, folderId: "1RbGqHOFpmkMnCsIGJiBZtCYU8RoqlvPL" },
+  { title: "Go Train Commercial", category: "Commercial", thumbnail: "/thumbnails/go-train.jpg", folderId: null },
+  { title: "Kings Landing", category: "Modeling", thumbnail: null, folderId: null },
+  { title: "Marcham Golf Club", category: "Commercial", thumbnail: null, folderId: null },
+  { title: "Moneta Photoshoot", category: "Modeling", thumbnail: null, folderId: null },
+  { title: "Mr Fish", category: "Commercial", thumbnail: null, folderId: null },
+  { title: "Mr. Coco", category: "Commercial", thumbnail: null, folderId: null },
+  { title: "NA Chinese Radio Station", category: "Commercial", thumbnail: null, folderId: null },
+  { title: "Niagara Falls Winery", category: "Commercial", thumbnail: null, folderId: null },
+  { title: "Ramen Station", category: "Commercial", thumbnail: null, folderId: null },
+  { title: "Re:Max", category: "Commercial", thumbnail: null, folderId: null },
+  { title: "ShangriLa", category: "Modeling", thumbnail: null, folderId: null },
+  { title: "The Ranch", category: "Modeling", thumbnail: null, folderId: null },
 ];
 
 const categories = ["All", "Modeling", "Acting", "Commercial"];
 
-function DriveThumb({ folderId }: { folderId: string }) {
-  // Zoom the Drive embedded folder view so only the first image fills the card.
-  // Drive grid at ~280px wide: 1 col, image starts at ~(38px, 65px) in iframe coords.
-  const SCALE = 2.1;
-  const HEADER = 65;
-  const CELL_LEFT = 38;
+function CardThumb({ project }: { project: Project }) {
+  if (project.thumbnail) {
+    return (
+      <img
+        src={project.thumbnail}
+        alt={project.title}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+    );
+  }
+
+  if (project.folderId) {
+    return (
+      <div className="absolute inset-0 overflow-hidden">
+        <iframe
+          src={`https://drive.google.com/embeddedfolderview?id=${project.folderId}#grid`}
+          title="preview"
+          style={{
+            position: "absolute",
+            top: "-137px",
+            left: "-80px",
+            width: "280px",
+            height: "700px",
+            transform: "scale(2.1)",
+            transformOrigin: "top left",
+            pointerEvents: "none",
+            border: "none",
+          }}
+          loading="lazy"
+        />
+        <div className="absolute inset-x-0 bottom-0 h-10 bg-zinc-900" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to top, rgba(24,24,27,0.95) 0%, rgba(24,24,27,0.4) 25%, rgba(0,0,0,0) 50%)",
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      <iframe
-        src={`https://drive.google.com/embeddedfolderview?id=${folderId}#grid`}
-        title="preview"
-        style={{
-          position: "absolute",
-          top: `${-(HEADER * SCALE)}px`,
-          left: `${-(CELL_LEFT * SCALE)}px`,
-          width: "280px",
-          height: "700px",
-          transform: `scale(${SCALE})`,
-          transformOrigin: "top left",
-          pointerEvents: "none",
-          border: "none",
-        }}
-        loading="lazy"
-      />
-      {/* Solid black strip hides Drive file-name labels at bottom; gradient fades up */}
-      <div className="absolute inset-x-0 bottom-0 h-10 bg-black" />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 22%, rgba(0,0,0,0) 50%)",
-        }}
-      />
+    <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+      <span className="text-white/20 text-xs font-mono">Coming soon</span>
     </div>
   );
 }
@@ -94,7 +104,6 @@ export default function Modeling() {
             </p>
           </AnimatedSection>
 
-          {/* Filter tabs */}
           <AnimatedSection delay={0.1}>
             <div className="flex flex-wrap gap-2 mb-12">
               {categories.map((cat) => (
@@ -113,34 +122,26 @@ export default function Modeling() {
             </div>
           </AnimatedSection>
 
-          {/* Gallery grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filtered.map((p, i) => (
               <AnimatedSection key={p.title} delay={i * 0.04}>
                 <button
-                  onClick={() => setSelected(p)}
+                  onClick={() => (p.thumbnail || p.folderId) ? setSelected(p) : undefined}
                   className="w-full text-left group"
                 >
                   <div className="rounded-xl overflow-hidden border border-white/10 transition-all duration-300 group-hover:border-white/30 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                    {/* Thumbnail area */}
                     <div className="aspect-[3/4] bg-zinc-900 relative">
-                      {p.folderId ? (
-                        <DriveThumb folderId={p.folderId} />
-                      ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
-                          <span className="text-white/20 text-xs font-mono">Coming soon</span>
+                      <CardThumb project={p} />
+
+                      {(p.thumbnail || p.folderId) && (
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                          <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-sm font-medium px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm">
+                            View Photos
+                          </span>
                         </div>
                       )}
-
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                        <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-sm font-medium px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm">
-                          View Photos
-                        </span>
-                      </div>
                     </div>
 
-                    {/* Label */}
                     <div className="p-4 bg-zinc-900 border-t border-white/8">
                       <span className="text-xs text-white/40 uppercase tracking-wider font-mono">{p.category}</span>
                       <h3 className="font-display font-semibold text-sm mt-1 text-white/90 leading-snug">{p.title}</h3>
@@ -151,7 +152,6 @@ export default function Modeling() {
             ))}
           </div>
 
-          {/* CTA */}
           <AnimatedSection className="text-center py-24">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">Interested in Working Together?</h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -166,10 +166,8 @@ export default function Modeling() {
         </div>
       </section>
 
-      {/* Lightbox */}
       {selected && (
         <div className="fixed inset-0 z-50 flex flex-col" style={{ backgroundColor: "rgba(0,0,0,0.97)" }}>
-          {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 flex-shrink-0">
             <div>
               <span className="text-xs text-white/40 uppercase tracking-wider font-mono">{selected.category}</span>
@@ -196,7 +194,6 @@ export default function Modeling() {
             </div>
           </div>
 
-          {/* Content */}
           <div className="flex-1 overflow-hidden">
             {selected.folderId ? (
               <iframe
@@ -204,9 +201,17 @@ export default function Modeling() {
                 className="w-full h-full border-0"
                 title={selected.title}
               />
+            ) : selected.thumbnail ? (
+              <div className="flex items-center justify-center h-full p-8">
+                <img
+                  src={selected.thumbnail}
+                  alt={selected.title}
+                  className="max-h-full max-w-full object-contain rounded-lg"
+                />
+              </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-6">
-                <p className="text-white/40">Photos for this project are being added soon.</p>
+              <div className="flex items-center justify-center h-full">
+                <p className="text-white/40">Photos coming soon.</p>
               </div>
             )}
           </div>
