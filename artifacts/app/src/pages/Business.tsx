@@ -21,6 +21,7 @@ type Event = {
   date: string;
   industry: string;
   caseStudy: CaseStudy | null;
+  thumbnail?: string;
 };
 
 const events: Event[] = [
@@ -62,6 +63,7 @@ const events: Event[] = [
     date: "2026",
     industry: "EV & Energy",
     caseStudy: null,
+    thumbnail: "/thumbnails/ev-expo.jpg",
   },
   {
     name: "National Home Show",
@@ -175,8 +177,15 @@ function EventCard({ event }: { event: Event }) {
       )}
 
       {open && !cs && (
-        <div className="px-6 pb-6 border-t border-white/8">
-          <p className="text-sm text-white/40 pt-5 italic">Full case study coming soon. Book me to represent you at this event.</p>
+        <div className="px-6 pb-6 border-t border-white/8 pt-5">
+          {event.thumbnail && (
+            <img
+              src={event.thumbnail}
+              alt={event.name}
+              className="w-full rounded-xl object-cover max-h-64 mb-4"
+            />
+          )}
+          <p className="text-sm text-white/40 italic">Full case study coming soon. Book me to represent you at this event.</p>
         </div>
       )}
     </div>
