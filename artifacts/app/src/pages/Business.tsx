@@ -229,53 +229,6 @@ const Business = () => (
           </div>
         </AnimatedSection>
 
-        {/* Services + Location side by side */}
-        <AnimatedSection delay={0.2}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-            {/* Services */}
-            <div>
-              <h2 className="font-display text-2xl font-bold mb-6">Our Services</h2>
-              <div className="space-y-4">
-                {services.map((s) => (
-                  <div key={s.name}>
-                    <div className="flex justify-between text-sm mb-1.5">
-                      <span className="text-white/80">{s.name}</span>
-                      <span className="text-white/40 font-mono">{s.value}</span>
-                    </div>
-                    <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-white/60 rounded-full"
-                        style={{ width: `${(s.value / 60) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Location */}
-            <div>
-              <h2 className="font-display text-2xl font-bold mb-6">Client Locations</h2>
-              <div className="space-y-4">
-                {locations.map((l) => (
-                  <div key={l.name}>
-                    <div className="flex justify-between text-sm mb-1.5">
-                      <span className="text-white/80">{l.name}</span>
-                      <span className="text-white/40 font-mono">{l.pct}%</span>
-                    </div>
-                    <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-white/60 rounded-full"
-                        style={{ width: `${l.pct}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
-
         {/* CTA */}
         <AnimatedSection className="text-center py-16 border-t border-white/10">
           <p className="text-white/40 text-sm uppercase tracking-widest font-mono mb-4">Ready to grow?</p>
