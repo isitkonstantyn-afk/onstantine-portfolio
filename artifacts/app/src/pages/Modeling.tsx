@@ -37,23 +37,39 @@ const projects: Project[] = [
 const categories = ["All", "Modeling", "Acting", "Commercial"];
 
 function DriveThumb({ folderId }: { folderId: string }) {
+  // Zoom the Drive embedded folder view so only the first image fills the card.
+  // Drive grid at ~280px wide: 1 col, image starts at ~(38px, 65px) in iframe coords.
+  const SCALE = 2.1;
+  const HEADER = 65;
+  const CELL_LEFT = 38;
+
   return (
     <div className="absolute inset-0 overflow-hidden">
       <iframe
         src={`https://drive.google.com/embeddedfolderview?id=${folderId}#grid`}
         title="preview"
-        className="border-0 pointer-events-none"
         style={{
-          width: "350%",
-          height: "350%",
-          transform: "scale(0.286)",
+          position: "absolute",
+          top: `${-(HEADER * SCALE)}px`,
+          left: `${-(CELL_LEFT * SCALE)}px`,
+          width: "280px",
+          height: "700px",
+          transform: `scale(${SCALE})`,
           transformOrigin: "top left",
-          opacity: 0.9,
+          pointerEvents: "none",
+          border: "none",
         }}
         loading="lazy"
       />
-      {/* Gradient overlay so the label at bottom stays readable */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+      {/* Solid black strip hides Drive file-name labels at bottom; gradient fades up */}
+      <div className="absolute inset-x-0 bottom-0 h-10 bg-black" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 22%, rgba(0,0,0,0) 50%)",
+        }}
+      />
     </div>
   );
 }
