@@ -13,7 +13,7 @@ type Project = {
 
 const projects: Project[] = [
   { title: "Acting & Commercials", category: "Acting", thumbnail: null, folderId: null },
-  { title: "Angus Glen Golf Club", category: "Commercial", thumbnail: null, folderId: "1bnVQiLbKF_JZgb8zb_eslQu4UkUQT4EI" },
+  { title: "Angus Glen Golf Club", category: "Commercial", thumbnail: "/thumbnails/angus-glen.jpg", folderId: "1bnVQiLbKF_JZgb8zb_eslQu4UkUQT4EI" },
   { title: "Arcade", category: "Modeling", thumbnail: null, folderId: "1oiUBr4clSspGJ-c2cP31qTmd3c7TcnZb" },
   { title: "Burlington Private Airport", category: "Commercial", thumbnail: "/thumbnails/burlington.jpg", folderId: "1T2UCUAbIP0n3xyVw8aSZV2l5my-yQUqY" },
   { title: "Clothing Photoshoot", category: "Modeling", thumbnail: null, folderId: "1lT5uZaQT6yy7YHJolzYrzNwWcumTT1KU" },
@@ -22,14 +22,14 @@ const projects: Project[] = [
   { title: "Fitness", category: "Modeling", thumbnail: "/thumbnails/fitness.jpg", folderId: "1RbGqHOFpmkMnCsIGJiBZtCYU8RoqlvPL" },
   { title: "Go Train Commercial", category: "Commercial", thumbnail: "/thumbnails/go-train.jpg", folderId: null },
   { title: "Kings Landing", category: "Modeling", thumbnail: null, folderId: null },
-  { title: "Markham Golf Club", category: "Commercial", thumbnail: null, folderId: null },
+  { title: "Markham Golf Club", category: "Commercial", thumbnail: "/thumbnails/markham.jpg", folderId: null },
   { title: "Moneta Photoshoot", category: "Modeling", thumbnail: null, folderId: null },
   { title: "Mr Fish", category: "Commercial", thumbnail: null, folderId: null },
   { title: "Mr. Coco", category: "Commercial", thumbnail: "/thumbnails/mr-coco.jpg", folderId: null },
   { title: "NA Chinese Radio Station", category: "Commercial", thumbnail: null, folderId: null },
   { title: "Niagara Falls Winery", category: "Commercial", thumbnail: null, folderId: null },
   { title: "Ramen Station", category: "Commercial", thumbnail: null, folderId: null },
-  { title: "Re:Max", category: "Commercial", thumbnail: null, folderId: null },
+  { title: "Re:Max", category: "Commercial", thumbnail: "/thumbnails/remax.jpg", folderId: null },
   { title: "ShangriLa", category: "Modeling", thumbnail: "/thumbnails/shangrila.jpg", folderId: null },
   { title: "The Ranch", category: "Modeling", thumbnail: "/thumbnails/ranch.jpg", folderId: null },
 ];
