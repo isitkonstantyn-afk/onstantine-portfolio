@@ -24,6 +24,7 @@ type ManagedAccount = {
   desc: string;
   stats: { label: string; value: string }[];
   highlight: string;
+  banner?: string;
 };
 
 const accounts: ManagedAccount[] = [
@@ -46,12 +47,13 @@ const accounts: ManagedAccount[] = [
     role: "Channel Manager & Growth Strategist",
     desc: "Managed YouTube presence for a dance and entertainment brand — optimizing video titles, thumbnails, descriptions, and upload cadence to maximize reach and subscriber growth.",
     stats: [
-      { label: "Platform", value: "YouTube" },
-      { label: "Niche", value: "Dance & Entertainment" },
-      { label: "Content Type", value: "Performances, tutorials & events" },
+      { label: "Subscribers", value: "341" },
+      { label: "Videos", value: "28" },
+      { label: "Content Type", value: "Performances & covers" },
       { label: "Strategy", value: "SEO + consistency" },
     ],
     highlight: "Dance & entertainment content management",
+    banner: "/thumbnails/dantitude-youtube.jpg",
   },
   {
     platforms: [{ platform: "LinkedIn", handle: "Maxperr Energy", url: "https://www.linkedin.com/company/maxperrenergy/" }],
@@ -113,7 +115,7 @@ const accounts: ManagedAccount[] = [
   },
 ];
 
-const platformColors: Record<Platform, string> = {
+const platformBadge: Record<Platform, string> = {
   TikTok: "bg-pink-500/20 text-pink-400 border-pink-500/30",
   YouTube: "bg-red-500/20 text-red-400 border-red-500/30",
   LinkedIn: "bg-blue-500/20 text-blue-400 border-blue-500/30",
@@ -127,41 +129,75 @@ const platformDot: Record<Platform, string> = {
   Instagram: "bg-purple-400",
 };
 
+const platformGradient: Record<Platform, string> = {
+  TikTok: "from-[#010101] via-[#1a0a1a] to-[#69C9D0]/40",
+  YouTube: "from-[#0f0f0f] via-[#1a0505] to-[#FF0000]/30",
+  LinkedIn: "from-[#0a0f1a] via-[#0a1428] to-[#0A66C2]/40",
+  Instagram: "from-[#1a0a1a] via-[#1a0a10] to-[#C13584]/40",
+};
+
+const platformSymbol: Record<Platform, string> = {
+  TikTok: "♪",
+  YouTube: "▶",
+  LinkedIn: "in",
+  Instagram: "◈",
+};
+
 function AccountCard({ account }: { account: ManagedAccount }) {
   const primaryPlatform = account.platforms[0].platform;
   return (
-    <div className="glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col">
-      {/* Header */}
-      <div className="p-6 pb-4 border-b border-white/8">
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div className="flex flex-wrap gap-2">
-            {account.platforms.map((p) => (
-              <a
-                key={p.url}
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded-full border transition-opacity hover:opacity-80 ${platformColors[p.platform]}`}
-              >
-                {p.platform}
-                <ExternalLink size={10} />
-              </a>
-            ))}
+    <div className="glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col group">
+
+      {/* Visual Banner */}
+      <div className="relative h-40 overflow-hidden">
+        {account.banner ? (
+          <img
+            src={account.banner}
+            alt={account.platforms[0].handle}
+            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <div className={`w-full h-full bg-gradient-to-br ${platformGradient[primaryPlatform]} flex items-end justify-between p-5`}>
+            <span className="font-display text-5xl font-black text-white/8 select-none leading-none">
+              {platformSymbol[primaryPlatform]}
+            </span>
+            <span className="font-display text-6xl font-black text-white/5 select-none leading-none rotate-12">
+              {platformSymbol[primaryPlatform]}
+            </span>
           </div>
+        )}
+        {/* Overlay gradient for text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+        {/* Handle overlaid on banner */}
+        <div className="absolute bottom-0 left-0 p-4">
+          <p className="font-display text-lg font-bold text-white leading-tight drop-shadow-lg">
+            {account.platforms.map((p) => p.handle).join(" · ")}
+          </p>
+          <p className="text-xs text-white/60 font-mono">{account.niche}</p>
         </div>
-        <h3 className="font-display text-xl font-bold text-white mb-0.5">
-          {account.platforms.map((p) => p.handle).join(" · ")}
-        </h3>
-        <p className="text-xs text-white/40 font-mono">{account.niche}</p>
+        {/* Platform badges top-right */}
+        <div className="absolute top-3 right-3 flex gap-1.5">
+          {account.platforms.map((p) => (
+            <a
+              key={p.url}
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded-full border backdrop-blur-sm transition-opacity hover:opacity-80 ${platformBadge[p.platform]}`}
+            >
+              {p.platform} <ExternalLink size={9} />
+            </a>
+          ))}
+        </div>
       </div>
 
       {/* Body */}
-      <div className="p-6 flex-1 flex flex-col gap-4">
+      <div className="p-5 flex-1 flex flex-col gap-4">
         <div>
-          <p className="text-xs text-white/40 uppercase tracking-wider font-mono mb-1">My Role</p>
+          <p className="text-xs text-white/40 uppercase tracking-wider font-mono mb-0.5">My Role</p>
           <p className="text-sm font-semibold text-white">{account.role}</p>
         </div>
-        <p className="text-sm text-white/60 leading-relaxed">{account.desc}</p>
+        <p className="text-sm text-white/55 leading-relaxed">{account.desc}</p>
 
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-2 mt-auto">
@@ -174,7 +210,7 @@ function AccountCard({ account }: { account: ManagedAccount }) {
         </div>
 
         {/* Highlight pill */}
-        <div className="flex items-center gap-2 mt-1">
+        <div className="flex items-center gap-2">
           <span className={`inline-block w-2 h-2 rounded-full flex-shrink-0 ${platformDot[primaryPlatform]}`} />
           <p className="text-xs text-white/50">{account.highlight}</p>
         </div>
