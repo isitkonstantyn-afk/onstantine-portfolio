@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "ZDsE5l56X6dfmz8FZ82q6"
+uri = "file://artifacts/promo-video/public/images/tech.png"
+type = "image"
+title = "Abstract web tech"
+
+[[generated]]
+id = "GZrOxroFal3GVTqCHzijY"
+uri = "file://artifacts/promo-video/public/images/modeling.png"
+type = "image"
+title = "Cinematic portrait silhouette"
+
+[[generated]]
+id = "lIG0ucs4iF97F9Qhqlajb"
+uri = "file://artifacts/promo-video/public/images/events.png"
+type = "image"
+title = "Event networking abstract"
