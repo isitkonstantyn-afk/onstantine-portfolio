@@ -36,6 +36,21 @@ const apps = [
     thumbnail: "/thumbnails/coview.jpg",
   },
   {
+    name: "Trevra",
+    type: "Luxury E-Commerce Website",
+    desc: "Built the web presence for Trevra — a high-end Imperial Chinese silversmithing brand sold at Dubai and Abu Dhabi's finest addresses. Dark, editorial aesthetic with private viewing bookings, corporate gifting, and curated collections of hand-forged 999 pure silver artisanware.",
+    tags: ["Web", "E-Commerce", "Luxury", "Vercel"],
+    url: "https://trevra.cn",
+    thumbnail: "/thumbnails/trevra.jpg",
+  },
+  {
+    name: "ChatSpot",
+    type: "AI Chat Platform",
+    desc: "Built and launched ChatSpot.ca — a Canadian AI-powered chat platform designed for businesses looking to integrate conversational AI into their customer experience and internal workflows.",
+    tags: ["AI", "Web", "SaaS", "Canada"],
+    url: "https://chatspot.ca",
+  },
+  {
     name: "Influencer CRM / Brand ERP",
     type: "SaaS Platform",
     desc: "End-to-end CRM for influencer agencies — manage talent, track campaigns, handle contracts, and report ROI all in one place.",
