@@ -25,13 +25,13 @@ const projects: Project[] = [
   { title: "Marcham Golf Club", category: "Commercial", thumbnail: null, folderId: null },
   { title: "Moneta Photoshoot", category: "Modeling", thumbnail: null, folderId: null },
   { title: "Mr Fish", category: "Commercial", thumbnail: null, folderId: null },
-  { title: "Mr. Coco", category: "Commercial", thumbnail: null, folderId: null },
+  { title: "Mr. Coco", category: "Commercial", thumbnail: "/thumbnails/mr-coco.jpg", folderId: null },
   { title: "NA Chinese Radio Station", category: "Commercial", thumbnail: null, folderId: null },
   { title: "Niagara Falls Winery", category: "Commercial", thumbnail: null, folderId: null },
   { title: "Ramen Station", category: "Commercial", thumbnail: null, folderId: null },
   { title: "Re:Max", category: "Commercial", thumbnail: null, folderId: null },
-  { title: "ShangriLa", category: "Modeling", thumbnail: null, folderId: null },
-  { title: "The Ranch", category: "Modeling", thumbnail: null, folderId: null },
+  { title: "ShangriLa", category: "Modeling", thumbnail: "/thumbnails/shangrila.jpg", folderId: null },
+  { title: "The Ranch", category: "Modeling", thumbnail: "/thumbnails/ranch.jpg", folderId: null },
 ];
 
 const categories = ["All", "Modeling", "Acting", "Commercial"];
