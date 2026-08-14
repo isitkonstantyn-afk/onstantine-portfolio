@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, MapPin, CheckCircle2, Users, ClipboardList, Megaphone, Handshake, Calendar } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MapPin, CheckCircle2, Users, ClipboardList, Megaphone, Handshake, Calendar, Sparkles, Building2, Mic2, Utensils, Lightbulb, Send } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
 import { bookingLinks } from "@/lib/bookingLinks";
@@ -116,6 +116,84 @@ const canHire = [
   "International event management",
 ];
 
+const collaborationPaths = [
+  {
+    icon: Handshake,
+    title: "Sponsor Your Event",
+    label: "Value sponsorship",
+    desc: "For hosts looking for support that is not cash sponsorship: venue connections, speakers, MCs, catering, creator coverage, brand activations, vendors, giveaways, or promotional help.",
+    options: ["Venue connections", "MCs and speakers", "Catering/vendor intros", "Creators and promo"],
+    cta: "Request sponsorship support",
+    subject: "Event sponsorship support request",
+    body: `Hi Elysium,
+
+I want to request value sponsorship or event support.
+
+Event name:
+Date / city:
+Expected guests:
+What I need: venue / MC / speaker / catering / creators / promotion / brand activation / other
+Event link or deck:
+What action I want from Elysium:
+
+Thanks,`
+  },
+  {
+    icon: Users,
+    title: "Co-Organize or Co-Host",
+    label: "Partnership event",
+    desc: "For people who want to build something together: shared event concepts, hosted experiences, community gatherings, industry mixers, panels, private socials, or partner-led activations.",
+    options: ["Co-hosted events", "Original concepts", "Partner activations", "Shared promotion"],
+    cta: "Pitch a collaboration",
+    subject: "Event co-host or co-organize pitch",
+    body: `Hi Elysium,
+
+I want to explore co-organizing or co-hosting an event.
+
+Event idea:
+Audience:
+City / date range:
+What I can bring:
+What I want Elysium to bring:
+Links / deck / references:
+
+Thanks,`
+  },
+  {
+    icon: Sparkles,
+    title: "Upgrade My Event",
+    label: "Proposal path",
+    desc: "For events that already have momentum and could become stronger with sharper positioning, better partners, creator coverage, guest experience, sponsor angles, or a stronger revenue model.",
+    options: ["Event strategy", "Partner map", "Sponsor angles", "Next-level proposal"],
+    cta: "Request upgrade proposal",
+    subject: "Event upgrade proposal request",
+    body: `Hi Elysium,
+
+I want Elysium to review and upgrade my event concept.
+
+Current event concept:
+Audience:
+Current status:
+What is working:
+What feels stuck:
+Revenue / sponsors / tickets:
+Links / deck / social:
+
+Thanks,`
+  },
+];
+
+const collaborationAssets = [
+  { icon: Building2, label: "Venues" },
+  { icon: Mic2, label: "MCs & speakers" },
+  { icon: Utensils, label: "Catering & vendors" },
+  { icon: Megaphone, label: "Promotion" },
+  { icon: Users, label: "Creators" },
+  { icon: Lightbulb, label: "Concept strategy" },
+];
+
+const contactEmail = "dmkonstantyn@gmail.com";
+
 function EventCard({ ev }: { ev: PastEvent }) {
   const cardInner = (
     <div className={`glass rounded-2xl border border-white/10 hover:border-white/25 transition-all duration-300 overflow-hidden group-hover:shadow-[0_0_30px_rgba(255,255,255,0.03)]`}>
@@ -219,6 +297,71 @@ const Events = () => (
               className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white text-black font-semibold hover:opacity-90 transition-opacity">
               Hire Me for Your Event <ArrowRight size={16} />
             </a>
+          </div>
+        </AnimatedSection>
+
+        {/* Collaboration */}
+        <AnimatedSection delay={0.04}>
+          <div className="mb-24 rounded-[2rem] border border-white/10 bg-white/[0.035] overflow-hidden">
+            <div className="p-6 sm:p-8 lg:p-10 border-b border-white/10 bg-gradient-to-br from-white/[0.07] via-white/[0.025] to-transparent">
+              <p className="text-white/35 text-xs tracking-[0.3em] uppercase mb-4">Collaborate With Elysium On Events</p>
+              <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-end">
+                <div>
+                  <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight mb-4">
+                    Bring the right people, partners, and ideas into your event.
+                  </h2>
+                  <p className="text-white/55 text-base md:text-lg leading-relaxed max-w-2xl">
+                    Elysium can support event hosts with access, introductions, co-hosting, creator coverage, and strategic upgrades. Start with the path that matches what you need.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {collaborationAssets.map(({ icon: Icon, label }) => (
+                    <div key={label} className="rounded-2xl border border-white/10 bg-black/25 px-3 py-4">
+                      <Icon size={18} className="text-white/45 mb-3" />
+                      <p className="text-sm font-semibold text-white/75 leading-tight">{label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-4 p-4 sm:p-6">
+              {collaborationPaths.map(({ icon: Icon, title, label, desc, options, cta, subject, body }) => (
+                <article key={title} className="rounded-3xl border border-white/10 bg-black/30 p-5 sm:p-6 flex flex-col min-h-[360px]">
+                  <div className="flex items-start justify-between gap-4 mb-5">
+                    <div className="size-11 rounded-2xl bg-white text-black flex items-center justify-center">
+                      <Icon size={20} />
+                    </div>
+                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/45">{label}</span>
+                  </div>
+                  <h3 className="font-display text-2xl font-bold mb-3">{title}</h3>
+                  <p className="text-sm text-white/52 leading-relaxed mb-5">{desc}</p>
+                  <div className="grid grid-cols-2 gap-2 mb-6">
+                    {options.map(option => (
+                      <span key={option} className="rounded-full bg-white/[0.06] border border-white/10 px-3 py-2 text-xs text-white/60">
+                        {option}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-auto flex flex-col gap-2">
+                    <a
+                      href={`mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-black px-5 py-3 text-sm font-semibold hover:opacity-90 transition-opacity"
+                    >
+                      {cta} <Send size={15} />
+                    </a>
+                    <a
+                      href={bookingLinks.eventsCollaboration}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white/75 hover:bg-white/[0.08] transition-colors"
+                    >
+                      Book event collaboration call <ArrowUpRight size={15} />
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </AnimatedSection>
 

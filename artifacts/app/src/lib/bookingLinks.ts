@@ -5,6 +5,7 @@ export const bookingLinks = {
   modeling: `${BOOKING_BASE_URL}/modeling-acting`,
   development: `${BOOKING_BASE_URL}/web-app-development`,
   events: `${BOOKING_BASE_URL}/events`,
+  eventsCollaboration: `${BOOKING_BASE_URL}/events-collaboration`,
   business: `${BOOKING_BASE_URL}/business-development`,
   socialMedia: `${BOOKING_BASE_URL}/social-media-strategy`,
 } as const;
