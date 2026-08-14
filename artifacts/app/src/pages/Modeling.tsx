@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, X, ExternalLink } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
+import { bookingLinks } from "@/lib/bookingLinks";
 
 type Project = {
   title: string;
@@ -155,12 +156,14 @@ export default function Modeling() {
           <AnimatedSection className="text-center py-24">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">Interested in Working Together?</h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contact"
+              <a
+                href={bookingLinks.modeling}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-foreground text-background font-medium"
               >
                 Book Me <ArrowRight size={16} />
-              </Link>
+              </a>
             </div>
           </AnimatedSection>
         </div>

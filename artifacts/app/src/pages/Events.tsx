@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, MapPin, CheckCircle2, Users, ClipboardList, Megaphone, Handshake, Calendar } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
+import { bookingLinks } from "@/lib/bookingLinks";
 
 type PastEvent = {
   title: string;
@@ -212,10 +212,13 @@ const Events = () => (
             From exclusive investor roundtables to large-scale networking events — I've co-hosted, organized, and project-managed events across Canada and internationally. Hire me to make yours happen.
           </p>
           <div className="flex flex-wrap gap-3 mb-20">
-            <Link to="/contact"
+            <a
+              href={bookingLinks.events}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white text-black font-semibold hover:opacity-90 transition-opacity">
               Hire Me for Your Event <ArrowRight size={16} />
-            </Link>
+            </a>
           </div>
         </AnimatedSection>
 
@@ -263,10 +266,13 @@ const Events = () => (
               ))}
             </div>
             <div className="px-8 pb-8">
-              <Link to="/contact"
+              <a
+                href={bookingLinks.events}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-black font-semibold hover:opacity-90 transition-opacity">
                 Let's Plan Your Event <ArrowRight size={16} />
-              </Link>
+              </a>
             </div>
           </div>
         </AnimatedSection>

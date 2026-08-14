@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Code2, GraduationCap, CheckCircle2 } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
+import { bookingLinks } from "@/lib/bookingLinks";
 
 const stack = [
   { name: "Flutter", category: "Mobile" },
@@ -48,7 +48,7 @@ const apps = [
     type: "AI Chat Platform",
     desc: "Built and launched ChatSpot.ca — a Canadian AI-powered chat platform designed for businesses looking to integrate conversational AI into their customer experience and internal workflows.",
     tags: ["AI", "Web", "SaaS", "Canada"],
-    url: "https://chatspot.ca",
+    url: "https://chatspot-vercel.vercel.app",
   },
   {
     name: "Influencer CRM / Brand ERP",
@@ -103,12 +103,14 @@ const Development = () => (
             I build production apps across mobile, web, and SaaS — and I coach students and entrepreneurs how to do the same, from zero to launch.
           </p>
           <div className="flex flex-wrap gap-3 mb-20">
-            <Link
-              to="/contact"
+            <a
+              href={bookingLinks.development}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white text-black font-semibold hover:opacity-90 transition-opacity"
             >
               Book a Coaching Session <ArrowRight size={16} />
-            </Link>
+            </a>
             <a
               href="#apps"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-white/20 text-white/70 hover:border-white/40 transition-colors"
@@ -215,12 +217,14 @@ const Development = () => (
 
             {/* CTA inside card */}
             <div className="px-8 pb-8">
-              <Link
-                to="/contact"
+              <a
+                href={bookingLinks.development}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-black font-semibold hover:opacity-90 transition-opacity"
               >
                 Start Coaching <ArrowRight size={16} />
-              </Link>
+              </a>
             </div>
           </div>
         </AnimatedSection>

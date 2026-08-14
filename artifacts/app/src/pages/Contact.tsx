@@ -3,6 +3,7 @@ import { Send, MapPin, Mail, Calendar } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlassCard from "@/components/GlassCard";
+import { bookingLinks } from "@/lib/bookingLinks";
 
 const serviceOptions = [
   "Modeling & Acting",
@@ -38,21 +39,25 @@ const Contact = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Contact Info */}
             <AnimatedSection className="md:col-span-1 flex flex-col gap-4" delay={0.1}>
-              <GlassCard>
-                <Mail className="text-accent mb-3" size={22} />
-                <h3 className="font-display font-semibold text-sm mb-1">Email</h3>
-                <p className="text-sm text-muted-foreground">hello@konstantine.com</p>
-              </GlassCard>
+              <a href="mailto:dmkonstantyn@gmail.com">
+                <GlassCard>
+                  <Mail className="text-accent mb-3" size={22} />
+                  <h3 className="font-display font-semibold text-sm mb-1">Email</h3>
+                  <p className="text-sm text-muted-foreground">dmkonstantyn@gmail.com</p>
+                </GlassCard>
+              </a>
               <GlassCard>
                 <MapPin className="text-accent mb-3" size={22} />
                 <h3 className="font-display font-semibold text-sm mb-1">Based In</h3>
-                <p className="text-sm text-muted-foreground">Halifax, Canada</p>
+                <p className="text-sm text-muted-foreground">Toronto, Canada</p>
               </GlassCard>
-              <GlassCard>
-                <Calendar className="text-accent mb-3" size={22} />
-                <h3 className="font-display font-semibold text-sm mb-1">Book a Call</h3>
-                <p className="text-sm text-muted-foreground">Schedule via Calendly</p>
-              </GlassCard>
+              <a href={bookingLinks.general} target="_blank" rel="noopener noreferrer">
+                <GlassCard>
+                  <Calendar className="text-accent mb-3" size={22} />
+                  <h3 className="font-display font-semibold text-sm mb-1">Book a Call</h3>
+                  <p className="text-sm text-muted-foreground">Schedule a 30-min call</p>
+                </GlassCard>
+              </a>
             </AnimatedSection>
 
             {/* Form */}
@@ -118,6 +123,14 @@ const Contact = () => {
                   >
                     Send Message <Send size={16} />
                   </button>
+                  <a
+                    href={bookingLinks.general}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 rounded-full border border-border text-foreground/70 font-semibold hover:border-foreground/40 hover:text-foreground transition-colors flex items-center justify-center gap-2 text-sm"
+                  >
+                    <Calendar size={15} /> Prefer to book a call instead?
+                  </a>
                 </form>
               )}
             </AnimatedSection>

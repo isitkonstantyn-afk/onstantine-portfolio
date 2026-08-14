@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, MapPin, Users, Target, Zap, Clock, TrendingUp } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
+import { bookingLinks } from "@/lib/bookingLinks";
 
 type CaseStudy = {
   hostedBy: string;
@@ -285,12 +285,14 @@ const Business = () => (
           <p className="text-white/50 mb-10 max-w-md mx-auto">
             I'll represent your brand, capture qualified leads, and deliver results — all within 48 hours.
           </p>
-          <Link
-            to="/contact"
+          <a
+            href={bookingLinks.business}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-foreground text-background font-semibold hover:opacity-90 transition-opacity"
           >
             Book Me <ArrowRight size={18} />
-          </Link>
+          </a>
         </AnimatedSection>
 
       </div>

@@ -1,6 +1,7 @@
 import { ExternalLink, BarChart3, Users, Target, TrendingUp } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
+import { bookingLinks } from "@/lib/bookingLinks";
 
 const services = [
   { icon: Users, title: "Account Management", desc: "Full management of social media accounts — content scheduling, community engagement, analytics, and growth strategy." },
@@ -270,7 +271,7 @@ const SocialMedia = () => (
           <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Want Me to Manage Your Accounts?</h2>
           <p className="text-white/50 mb-8 max-w-md mx-auto">Whether it's TikTok, LinkedIn, or YouTube — let's build your audience together.</p>
           <a
-            href="https://cal.com/konstantine"
+            href={bookingLinks.socialMedia}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors"

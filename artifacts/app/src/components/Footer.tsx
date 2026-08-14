@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { bookingLinks } from "@/lib/bookingLinks";
 
 const Footer = () => (
   <footer className="border-t border-border/50 mt-32">
@@ -23,9 +24,9 @@ const Footer = () => (
         <div>
           <h4 className="font-display text-sm font-semibold mb-4 text-muted-foreground uppercase tracking-wider">Connect</h4>
           <div className="flex flex-col gap-2">
+            <a href={bookingLinks.general} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground/70 hover:text-foreground transition-colors">Book a Call</a>
+            <a href="mailto:dmkonstantyn@gmail.com" className="text-sm text-foreground/70 hover:text-foreground transition-colors">dmkonstantyn@gmail.com</a>
             <Link to="/contact" className="text-sm text-foreground/70 hover:text-foreground transition-colors">Contact</Link>
-            <a href="#" className="text-sm text-foreground/70 hover:text-foreground transition-colors">LinkedIn</a>
-            <a href="#" className="text-sm text-foreground/70 hover:text-foreground transition-colors">Instagram</a>
           </div>
         </div>
       </div>

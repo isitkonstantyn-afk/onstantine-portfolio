@@ -4,6 +4,7 @@ import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import HeroSceneWrapper from "@/components/HeroSceneWrapper";
+import { bookingLinks } from "@/lib/bookingLinks";
 
 /* ─── Animated counter ──────────────────────────────────────── */
 function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
@@ -32,44 +33,6 @@ const stats = [
   { value: 15000, suffix: "+", label: "Event reach — ETC 2025" },
   { value: 6, suffix: "", label: "Disciplines mastered" },
   { value: 3, suffix: "", label: "Countries worked in" },
-];
-
-const services = [
-  {
-    label: "Modeling & Acting",
-    path: "/modeling",
-    desc: "20+ campaigns. Editorial, commercial, and screen talent with a pro portfolio that books.",
-    size: "large",
-    accent: "from-zinc-900 to-zinc-800",
-  },
-  {
-    label: "Business Dev",
-    path: "/business",
-    desc: "I'll walk the floor, capture leads, and deliver qualified prospects within 48 hours.",
-    size: "small",
-    accent: "from-zinc-900 to-zinc-800",
-  },
-  {
-    label: "Web & App Dev",
-    path: "/development",
-    desc: "Flutter · Supabase · N8N · GPT Codex. I build real apps — and teach you to ship yours.",
-    size: "small",
-    accent: "from-zinc-900 to-zinc-800",
-  },
-  {
-    label: "Events",
-    path: "/events",
-    desc: "DR, Toronto, Vancouver. From concept to curtain call — I make events happen.",
-    size: "small",
-    accent: "from-zinc-900 to-zinc-800",
-  },
-  {
-    label: "Social Media",
-    path: "/social-media",
-    desc: "Strategy, content, and influencer partnerships that grow audiences and drive revenue.",
-    size: "small",
-    accent: "from-zinc-900 to-zinc-800",
-  },
 ];
 
 const proof = [
@@ -104,10 +67,7 @@ const Index = () => {
 
       {/* ══════════════════════ HERO ══════════════════════════ */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-16 overflow-hidden">
-
         <HeroSceneWrapper />
-
-        {/* Deep vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_50%,transparent_20%,rgba(0,0,0,0.85)_100%)] pointer-events-none" />
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent pointer-events-none" />
 
@@ -131,7 +91,6 @@ const Index = () => {
             Konstantine
           </h1>
 
-          {/* Glowing underline */}
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
@@ -140,7 +99,6 @@ const Index = () => {
             style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
           />
 
-          {/* Role ticker */}
           <div className="h-9 overflow-hidden mb-14">
             <motion.p
               key={ri}
@@ -154,7 +112,6 @@ const Index = () => {
             </motion.p>
           </div>
 
-          {/* Hero statement */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -171,11 +128,11 @@ const Index = () => {
             transition={{ delay: 1.3, duration: 0.8 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link to="/contact"
+            <a href={bookingLinks.general} target="_blank" rel="noopener noreferrer"
               className="group px-10 py-4 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-all flex items-center justify-center gap-2 text-sm tracking-wide shadow-[0_0_40px_rgba(255,255,255,0.15)]">
               Book a Call
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
             <Link to="/modeling"
               className="px-10 py-4 rounded-full border border-white/15 text-white/60 font-medium hover:border-white/40 hover:text-white transition-all text-sm tracking-wide backdrop-blur-sm">
               View Portfolio
@@ -183,7 +140,6 @@ const Index = () => {
           </motion.div>
         </motion.div>
 
-        {/* Scroll cue */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -203,14 +159,7 @@ const Index = () => {
       <section className="border-y border-white/8 py-10 px-6 overflow-hidden">
         <div className="container max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="text-center"
-            >
+            <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.6 }} className="text-center">
               <div className="font-display text-4xl md:text-5xl font-bold text-white mb-1">
                 <Counter to={s.value} suffix={s.suffix} />
               </div>
@@ -224,20 +173,11 @@ const Index = () => {
       <section className="container max-w-6xl mx-auto px-6 py-28">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
           <p className="text-white/25 text-xs tracking-[0.4em] uppercase font-mono mb-3">What I Do</p>
-          <h2 className="font-display text-4xl md:text-6xl font-bold mb-4">
-            Six Ways I Can<br />Help You Win.
-          </h2>
+          <h2 className="font-display text-4xl md:text-6xl font-bold mb-4">Six Ways I Can<br />Help You Win.</h2>
           <p className="text-white/40 mb-16 max-w-md text-lg">Not a jack of all trades. A master of six — with receipts.</p>
         </motion.div>
-
-        {/* Bento grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-          {/* Large card - Modeling */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05, duration: 0.6 }}
-            className="md:col-span-2 md:row-span-1"
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05, duration: 0.6 }} className="md:col-span-2 md:row-span-1">
             <Link to="/modeling" className="group block h-full">
               <div className="h-full min-h-[240px] glass rounded-3xl p-8 border border-white/10 hover:border-white/25 transition-all duration-400 relative overflow-hidden flex flex-col justify-between">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/3 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/6 transition-all duration-700" />
@@ -253,8 +193,6 @@ const Index = () => {
               </div>
             </Link>
           </motion.div>
-
-          {/* Business Dev */}
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1, duration: 0.6 }}>
             <Link to="/business" className="group block h-full">
               <div className="h-full min-h-[240px] glass rounded-3xl p-7 border border-white/10 hover:border-white/25 transition-all duration-400 relative overflow-hidden flex flex-col justify-between">
@@ -267,8 +205,6 @@ const Index = () => {
               </div>
             </Link>
           </motion.div>
-
-          {/* Web Dev */}
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15, duration: 0.6 }}>
             <Link to="/development" className="group block h-full">
               <div className="h-full min-h-[200px] glass rounded-3xl p-7 border border-white/10 hover:border-white/25 transition-all duration-400 relative overflow-hidden flex flex-col justify-between">
@@ -281,8 +217,6 @@ const Index = () => {
               </div>
             </Link>
           </motion.div>
-
-          {/* Events */}
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}>
             <Link to="/events" className="group block h-full">
               <div className="h-full min-h-[200px] glass rounded-3xl p-7 border border-white/10 hover:border-white/25 transition-all duration-400 relative overflow-hidden flex flex-col justify-between">
@@ -295,12 +229,7 @@ const Index = () => {
               </div>
             </Link>
           </motion.div>
-
-          {/* Social Media - wide */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.25, duration: 0.6 }}
-            className="md:col-span-2"
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.25, duration: 0.6 }} className="md:col-span-2">
             <Link to="/social-media" className="group block h-full">
               <div className="h-full min-h-[200px] glass rounded-3xl p-7 border border-white/10 hover:border-white/25 transition-all duration-400 relative overflow-hidden flex flex-col justify-between">
                 <div className="absolute bottom-0 left-0 w-72 h-32 bg-white/2 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 group-hover:bg-white/5 transition-all duration-700" />
@@ -323,20 +252,10 @@ const Index = () => {
             <p className="text-white/25 text-xs tracking-[0.4em] uppercase font-mono mb-3">Track Record</p>
             <h2 className="font-display text-4xl md:text-5xl font-bold">Numbers Don't Lie.</h2>
           </motion.div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {proof.map((p, i) => (
-              <motion.div
-                key={p.label}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="glass rounded-2xl p-7 border border-white/10"
-              >
-                <div className="font-display text-5xl font-bold text-white mb-2">
-                  <Counter to={p.num} suffix={p.suffix} />
-                </div>
+              <motion.div key={p.label} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.6 }} className="glass rounded-2xl p-7 border border-white/10">
+                <div className="font-display text-5xl font-bold text-white mb-2"><Counter to={p.num} suffix={p.suffix} /></div>
                 <p className="text-white/70 text-sm font-medium mb-1">{p.label}</p>
                 <p className="text-white/30 text-xs">{p.sub}</p>
               </motion.div>
@@ -354,14 +273,7 @@ const Index = () => {
         </motion.div>
         <div className="flex flex-wrap gap-3">
           {industries.map((ind, i) => (
-            <motion.span
-              key={ind}
-              initial={{ opacity: 0, scale: 0.88 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.07, duration: 0.4 }}
-              className="px-6 py-3 rounded-full border border-white/12 text-white/60 text-sm font-medium hover:border-white/30 hover:text-white transition-all cursor-default"
-            >
+            <motion.span key={ind} initial={{ opacity: 0, scale: 0.88 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.4 }} className="px-6 py-3 rounded-full border border-white/12 text-white/60 text-sm font-medium hover:border-white/30 hover:text-white transition-all cursor-default">
               {ind}
             </motion.span>
           ))}
@@ -376,14 +288,7 @@ const Index = () => {
         </motion.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/8 rounded-2xl overflow-hidden border border-white/8">
           {education.map((ed, i) => (
-            <motion.div
-              key={ed.school}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-black p-8"
-            >
+            <motion.div key={ed.school} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-black p-8">
               <p className="text-white/25 text-xs font-mono uppercase tracking-widest mb-2">{ed.cred}</p>
               <h3 className="font-display font-semibold text-white text-lg">{ed.school}</h3>
             </motion.div>
@@ -393,13 +298,10 @@ const Index = () => {
 
       {/* ══════════════════ EPIC CTA ═══════════════════════════ */}
       <section className="relative px-6 py-40 overflow-hidden">
-        {/* Background glow */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[600px] h-[600px] rounded-full"
-            style={{ background: "radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)" }} />
+          <div className="w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)" }} />
         </div>
         <div className="absolute inset-0 border-t border-white/8 pointer-events-none" />
-
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -408,8 +310,7 @@ const Index = () => {
           className="container max-w-4xl mx-auto text-center relative z-10"
         >
           <p className="text-white/25 text-xs tracking-[0.5em] uppercase font-mono mb-8">Let's Build Something</p>
-          <h2 className="font-display font-bold leading-[0.95] mb-8"
-            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
+          <h2 className="font-display font-bold leading-[0.95] mb-8" style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
             Ready to Work<br />
             <span className="text-white/40">With the Best?</span>
           </h2>
@@ -417,11 +318,11 @@ const Index = () => {
             Whether you need a brand face, an app built, leads from an expo, or a full event managed — I show up and I deliver.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact"
+            <a href={bookingLinks.general} target="_blank" rel="noopener noreferrer"
               className="group px-12 py-5 rounded-full bg-white text-black font-bold hover:bg-white/90 transition-all flex items-center justify-center gap-2 shadow-[0_0_60px_rgba(255,255,255,0.12)] text-sm tracking-wide">
               Book a Call
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
             <Link to="/modeling"
               className="px-12 py-5 rounded-full border border-white/15 text-white/50 font-medium hover:border-white/35 hover:text-white transition-all text-sm tracking-wide">
               Explore Work
