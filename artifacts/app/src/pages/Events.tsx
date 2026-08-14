@@ -1,7 +1,7 @@
 import { ArrowRight, ArrowUpRight, MapPin, CheckCircle2, Users, ClipboardList, Megaphone, Handshake, Calendar, Sparkles, Building2, Mic2, Utensils, Lightbulb, Send } from "lucide-react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
-import { bookingLinks } from "@/lib/bookingLinks";
+import { bookingLinks, eventCollaborationForms } from "@/lib/bookingLinks";
 
 type PastEvent = {
   title: string;
@@ -124,19 +124,7 @@ const collaborationPaths = [
     desc: "For hosts looking for support that is not cash sponsorship: venue connections, speakers, MCs, catering, creator coverage, brand activations, vendors, giveaways, or promotional help.",
     options: ["Venue connections", "MCs and speakers", "Catering/vendor intros", "Creators and promo"],
     cta: "Request sponsorship support",
-    subject: "Event sponsorship support request",
-    body: `Hi Elysium,
-
-I want to request value sponsorship or event support.
-
-Event name:
-Date / city:
-Expected guests:
-What I need: venue / MC / speaker / catering / creators / promotion / brand activation / other
-Event link or deck:
-What action I want from Elysium:
-
-Thanks,`
+    formUrl: eventCollaborationForms.sponsorship,
   },
   {
     icon: Users,
@@ -145,19 +133,7 @@ Thanks,`
     desc: "For people who want to build something together: shared event concepts, hosted experiences, community gatherings, industry mixers, panels, private socials, or partner-led activations.",
     options: ["Co-hosted events", "Original concepts", "Partner activations", "Shared promotion"],
     cta: "Pitch a collaboration",
-    subject: "Event co-host or co-organize pitch",
-    body: `Hi Elysium,
-
-I want to explore co-organizing or co-hosting an event.
-
-Event idea:
-Audience:
-City / date range:
-What I can bring:
-What I want Elysium to bring:
-Links / deck / references:
-
-Thanks,`
+    formUrl: eventCollaborationForms.cohost,
   },
   {
     icon: Sparkles,
@@ -166,20 +142,7 @@ Thanks,`
     desc: "For events that already have momentum and could become stronger with sharper positioning, better partners, creator coverage, guest experience, sponsor angles, or a stronger revenue model.",
     options: ["Event strategy", "Partner map", "Sponsor angles", "Next-level proposal"],
     cta: "Request upgrade proposal",
-    subject: "Event upgrade proposal request",
-    body: `Hi Elysium,
-
-I want Elysium to review and upgrade my event concept.
-
-Current event concept:
-Audience:
-Current status:
-What is working:
-What feels stuck:
-Revenue / sponsors / tickets:
-Links / deck / social:
-
-Thanks,`
+    formUrl: eventCollaborationForms.upgrade,
   },
 ];
 
@@ -191,8 +154,6 @@ const collaborationAssets = [
   { icon: Users, label: "Creators" },
   { icon: Lightbulb, label: "Concept strategy" },
 ];
-
-const contactEmail = "dmkonstantyn@gmail.com";
 
 function EventCard({ ev }: { ev: PastEvent }) {
   const cardInner = (
@@ -326,7 +287,7 @@ const Events = () => (
             </div>
 
             <div className="grid lg:grid-cols-3 gap-4 p-4 sm:p-6">
-              {collaborationPaths.map(({ icon: Icon, title, label, desc, options, cta, subject, body }) => (
+              {collaborationPaths.map(({ icon: Icon, title, label, desc, options, cta, formUrl }) => (
                 <article key={title} className="rounded-3xl border border-white/10 bg-black/30 p-5 sm:p-6 flex flex-col min-h-[360px]">
                   <div className="flex items-start justify-between gap-4 mb-5">
                     <div className="size-11 rounded-2xl bg-white text-black flex items-center justify-center">
@@ -345,7 +306,9 @@ const Events = () => (
                   </div>
                   <div className="mt-auto flex flex-col gap-2">
                     <a
-                      href={`mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
+                      href={formUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-black px-5 py-3 text-sm font-semibold hover:opacity-90 transition-opacity"
                     >
                       {cta} <Send size={15} />
