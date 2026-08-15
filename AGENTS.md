@@ -13,6 +13,8 @@ code under `scripts/`.
     ahead-of-origin rules.
   - `docs/agent-guidelines/component-reuse.md` for pages, components, UI
     primitives, tokens, and workspace boundaries.
+  - `docs/agent-guidelines/source-reuse.md` when reusing code from this repo,
+    another local project, historical backup, or GitHub.
   - `docs/agent-guidelines/validation.md` for pnpm checks and route smoke.
 - Inspect `package.json`, `pnpm-workspace.yaml`, `artifacts/app/package.json`,
   `artifacts/app/src/App.tsx`, `artifacts/app/src/index.css`, and the relevant

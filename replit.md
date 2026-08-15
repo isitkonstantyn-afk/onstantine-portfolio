@@ -53,6 +53,7 @@ Read these before coding:
 - `AGENTS.md`
 - `docs/agent-guidelines/git-workflow.md`
 - `docs/agent-guidelines/component-reuse.md`
+- `docs/agent-guidelines/source-reuse.md`
 - `docs/agent-guidelines/validation.md`
 
 Do not add Supabase guidance to this app unless backend/auth is introduced; the
