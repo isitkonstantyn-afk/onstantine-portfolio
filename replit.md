@@ -45,3 +45,15 @@ Imported from lovable.dev. No Supabase was used — pure frontend app. Replaced:
 - `lovable-tagger` → removed
 - `@tailwindcss/vite` (v4) → Tailwind v3 via PostCSS
 - `BrowserRouter` now uses `basename={import.meta.env.BASE_URL}` for Replit proxy routing
+
+## Agent Workflow Docs
+
+Read these before coding:
+
+- `AGENTS.md`
+- `docs/agent-guidelines/git-workflow.md`
+- `docs/agent-guidelines/component-reuse.md`
+- `docs/agent-guidelines/validation.md`
+
+Do not add Supabase guidance to this app unless backend/auth is introduced; the
+current app is pure frontend.
