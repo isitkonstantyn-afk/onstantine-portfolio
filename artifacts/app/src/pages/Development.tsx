@@ -51,6 +51,13 @@ const apps = [
     url: "https://chatspot-vercel.vercel.app",
   },
   {
+    name: "Red Dot Reader",
+    type: "Speed Reading & Concept Mapping Tool",
+    desc: "A deployable browser app for rapid serial visual presentation reading with red-dot focus alignment, adjustable pacing, mobile fullscreen controls, and local Ollama-powered concept-map generation with a fallback parser.",
+    tags: ["JavaScript", "AI", "Ollama", "Vercel"],
+    url: "https://red-dot-reader.vercel.app",
+  },
+  {
     name: "Influencer CRM / Brand ERP",
     type: "SaaS Platform",
     desc: "End-to-end CRM for influencer agencies — manage talent, track campaigns, handle contracts, and report ROI all in one place.",
